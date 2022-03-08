@@ -18,8 +18,8 @@
 |                | Version                     |
 |----------------|-----------------------------|
 | Xcode          | 13.2.1                      |
-| Android Studio | Arctic Fox 2020.3.1 Patch 4 |
-| Flutter        | 2.8.1                       |
+| Android Studio | Bumblebee 2021.1.1 Patch 2  |
+| Flutter        | 2.10.3                      |
 | Swift          | 5.5.2                       |
 | Kotlin         | 1.6.10                      |
 
