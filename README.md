@@ -17,11 +17,11 @@
 
 |                | Version                     |
 |----------------|-----------------------------|
-| Xcode          | 13.2.1                      |
-| Android Studio | Bumblebee 2021.1.1 Patch 2  |
-| Flutter        | 2.10.3                      |
-| Swift          | 5.5.2                       |
-| Kotlin         | 1.6.10                      |
+| Xcode          | -                           |
+| Android Studio | -                           |
+| Flutter        | 2.10.x                      |
+| Swift          | -                           |
+| Kotlin         | -                           |
 
 ※ 本プロジェクト更新時点
 
