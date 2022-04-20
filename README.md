@@ -41,6 +41,7 @@
 - 何かしらのキーワードを入力できる
 - 入力したキーワードで GitHub のリポジトリを検索できる
 - GitHub のリポジトリを検索する際、GitHub API（[`search/repositories`](https://docs.github.com/ja/rest/reference/search#search-repositories)）を利用する
+  - [github | Dart Package](https://pub.dev/packages/github) のようなパッケージは利用せず、API を呼ぶ処理を自分で実装すること
 - 検索結果は一覧で概要（リポジトリ名）を表示する
 - 検索結果のアイテムをタップしたら、該当リポジトリの詳細（リポジトリ名、オーナーアイコン、プロジェクト言語、Star 数、Watcher 数、Fork 数、Issue 数）を表示する
 
