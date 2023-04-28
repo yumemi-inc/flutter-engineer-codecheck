@@ -84,7 +84,7 @@
 - [私が（iOS エンジニアの）採用でコードチェックする時何を見ているのか](https://qiita.com/lovee/items/d76c68341ec3e7beb611)
 - [ゆめみの Android の採用コーディング試験を公開しました](https://qiita.com/blendthink/items/aa70b8b3106fb4e3555f)
 
-## ChatGPT等のAIサービス利用について
+## AI サービスの利用について
 
 ChatGPT等のAIサービスを利用することは、禁止しておりません。
 
