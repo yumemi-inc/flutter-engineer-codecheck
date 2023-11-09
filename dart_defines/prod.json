@@ -1,0 +1,6 @@
+{
+  "flavor": "prod",
+  "appId": "com.kuwanoya.GithubRepoSearch",
+  "appIdSuffix": "",
+  "appName": "Github Repo Search"
+}
