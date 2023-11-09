@@ -6,7 +6,13 @@
 
 ## linter
 
-[pedantic_mono](https://pub.dev/packages/pedantic_mono)
+デフォルトの[flutter_lints]をさらに厳しめにした[pedantic_mono](https://pub.dev/packages/pedantic_mono)を導入してます。
+
+追加で[custom_lint](https://pub.dev/packages/custom_lint)を導入して[riverpod_lint](https://pub.dev/packages/riverpod_lint)を追加してます。
+
+## formatter
+
+デフォルトのものを使用してます。
 
 ## VSCode Extensions
 
