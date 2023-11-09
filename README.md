@@ -1,12 +1,17 @@
 # Github Repository Search
 
-## アーキテクチャ
+## Architecture
 
 [flutter-architecture-blueprints](https://github.com/wasabeef/flutter-architecture-blueprints)
 
 ## linter
 
 [pedantic_mono](https://pub.dev/packages/pedantic_mono)
+
+## VSCode Extensions
+
+- [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
+  typo を防ぐために入れています。`.vscode/settings.json`に`cSpell.words`がありますが、導入してない場合は無視されるだけなので入れてなくても問題はありません。
 
 以下オリジナルのまま
 
