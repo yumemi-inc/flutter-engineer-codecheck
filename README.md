@@ -1,16 +1,20 @@
 # Github Repository Search
 
+## Git Branching Model
+
+[git-flow](https://nvie.com/posts/a-successful-git-branching-model/)を採用しました。
+
 ## Architecture
 
 [flutter-architecture-blueprints](https://github.com/wasabeef/flutter-architecture-blueprints)
 
-## linter
+## Linter
 
-デフォルトの[flutter_lints]をさらに厳しめにした[pedantic_mono](https://pub.dev/packages/pedantic_mono)を導入してます。
+デフォルトの[flutter_lints](https://pub.dev/packages/flutter_lints)をさらに厳しめにした[pedantic_mono](https://pub.dev/packages/pedantic_mono)を導入してます。
 
 追加で[custom_lint](https://pub.dev/packages/custom_lint)を導入して[riverpod_lint](https://pub.dev/packages/riverpod_lint)を追加してます。
 
-## formatter
+## Formatter
 
 デフォルトのものを使用してます。
 
