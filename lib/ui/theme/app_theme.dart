@@ -8,5 +8,8 @@ ThemeData appTheme(AppThemeRef ref) {
   return ThemeData(
     colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
     useMaterial3: true,
+    dividerTheme: const DividerThemeData(
+      space: 0, // Dividerの上下のスペースを0にする
+    ),
   );
 }

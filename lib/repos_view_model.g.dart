@@ -6,9 +6,9 @@ part of 'repos_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$reposViewModelHash() => r'37a6e61a3bc4ecb616ff1398eacfbf3f2548aa82';
+String _$reposViewModelHash() => r'f607e67715ddbb88c4ff3533446c47ead36510a6';
 
-/// 種類の状態がある
+/// 7種類の状態がある
 /// 1. null -> 初期状態
 /// 2. AsyncLoading & 値が入っていない -> ロード中を表示
 /// 3. AsyncLoading & 値か入っている -> データを表示しながらロード
