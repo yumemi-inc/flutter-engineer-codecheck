@@ -11,7 +11,6 @@ GithubDataSource githubDataSource(GithubDataSourceRef ref) {
   return GithubDataSource(ref);
 }
 
-// TODO: baseUrlを切り替えられるようにする
 @RestApi()
 abstract class GithubDataSource {
   factory GithubDataSource(GithubDataSourceRef ref) =>

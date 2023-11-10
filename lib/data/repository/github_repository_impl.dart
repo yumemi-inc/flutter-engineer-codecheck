@@ -5,13 +5,13 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'github_repository_impl.g.dart';
 
-// TODO: githubRepositoryImplProviderという名前のものが生成されるが、Implの部分を消したい
+// TODO(kuwano): githubRepositoryImplProviderという名前のものが生成されるが、Implの部分を消したい
 // アプリ内(ViewModel)ではGithubのRepositoryのことをRepoと呼ぶが、
 // RemoteのgithubDataSourceではrepositoryと呼びたい。
 // なので、ここで変換する。
 // また、Retrofitの自動生成APIを使用したいが、モデル変換をしたくないので、RetrofitObjectというモックを作成して、
 // jsonをそのまま保持している。
-// TODO: retrofitを使用せずに、dioだけで実装する
+// TODO(kuwano): retrofitを使用せずに、dioだけで実装する
 @riverpod
 class GithubRepositoryImpl extends _$GithubRepositoryImpl
     implements GithubRepository {

@@ -16,8 +16,11 @@
   },
   "dart.flutterSdkPath": ".fvm/flutter_sdk",
   "cSpell.words": [
+    "codecheck",
     "cupertino",
     "dotenv",
+    "interps",
+    "kuwano",
     "riverpod"
   ]
 }

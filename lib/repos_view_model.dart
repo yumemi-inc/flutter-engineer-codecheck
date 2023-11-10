@@ -26,6 +26,7 @@ class ReposViewModel extends _$ReposViewModel {
   int _page = 1;
   bool _hasNextPage = true;
 
+  // TODO(kuwano): hasNextPageをstateに含むようにする
   bool get hasNextPage => _hasNextPage;
 
   Future<void> searchRepos(String query) async {
