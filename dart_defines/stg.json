@@ -2,5 +2,6 @@
   "flavor": "stg",
   "appId": "com.kuwanoya.GithubRepoSearch",
   "appIdSuffix": ".stg",
-  "appName": "Github Repo Search stg"
+  "appName": "Github Repo Search stg",
+  "githubUrl": "https://api.github.com"
 }

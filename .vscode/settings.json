@@ -17,6 +17,7 @@
   "dart.flutterSdkPath": ".fvm/flutter_sdk",
   "cSpell.words": [
     "cupertino",
+    "dotenv",
     "riverpod"
   ]
 }
