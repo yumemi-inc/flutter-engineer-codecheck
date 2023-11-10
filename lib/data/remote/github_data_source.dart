@@ -20,5 +20,9 @@ abstract class GithubDataSource {
   @GET('/search/repositories')
   Future<RetrofitObject> searchRepositories(
     @Query('q') String query,
+    @Query('sort') String? sort,
+    @Query('order') String? order,
+    @Query('per_page') int? perPage,
+    @Query('page') int? page,
   );
 }

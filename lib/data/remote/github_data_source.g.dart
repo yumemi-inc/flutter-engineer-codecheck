@@ -19,9 +19,22 @@ class _GithubDataSource implements GithubDataSource {
   String? baseUrl;
 
   @override
-  Future<RetrofitObject> searchRepositories(String query) async {
+  Future<RetrofitObject> searchRepositories(
+    String query,
+    String? sort,
+    String? order,
+    int? perPage,
+    int? page,
+  ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'q': query};
+    final queryParameters = <String, dynamic>{
+      r'q': query,
+      r'sort': sort,
+      r'order': order,
+      r'per_page': perPage,
+      r'page': page,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio

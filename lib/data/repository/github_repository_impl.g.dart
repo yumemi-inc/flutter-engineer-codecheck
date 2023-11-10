@@ -7,7 +7,7 @@ part of 'github_repository_impl.dart';
 // **************************************************************************
 
 String _$githubRepositoryImplHash() =>
-    r'50ce9369ae9c2c20028f01be8599c174ac37519c';
+    r'1107247399a60c62a6e43facbb8f7ee5a6a5693b';
 
 /// See also [GithubRepositoryImpl].
 @ProviderFor(GithubRepositoryImpl)

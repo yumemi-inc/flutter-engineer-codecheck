@@ -23,8 +23,22 @@ class GithubRepositoryImpl extends _$GithubRepositoryImpl
   late final GithubDataSource _dataSource = ref.read(githubDataSourceProvider);
 
   @override
-  Future<SearchReposResult> searchRepos(String query) async {
-    final json = (await _dataSource.searchRepositories(query)).json;
+  Future<SearchReposResult> searchRepos(
+    String query, {
+    String? sort,
+    String? order,
+    int? perPage,
+    int? page,
+  }) async {
+    final retrofitObject = await _dataSource.searchRepositories(
+      query,
+      sort,
+      order,
+      perPage,
+      page,
+    );
+    final json = retrofitObject.json;
+
     return SearchReposResult.fromJson(json);
   }
 }
