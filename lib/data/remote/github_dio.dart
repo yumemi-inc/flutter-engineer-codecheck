@@ -14,7 +14,7 @@ Dio githubDio(GithubDioRef ref) {
     headers: {
       'Accept': 'application/vnd.github.v3+json',
       'Authorization': 'Bearer ${Env.githubToken}',
-      'X-Github-Api-Version': '2022-11-20',
+      'X-Github-Api-Version': '2022-11-28',
     },
   );
   return baseDio;
