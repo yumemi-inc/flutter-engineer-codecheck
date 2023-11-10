@@ -32,3 +32,7 @@ linter:
 analyzer:
   plugins:
     - custom_lint
+  errors:
+    # freezedのJsonKeyのエラーを無視する
+    # ref: https://github.com/rrousselGit/freezed/issues/488
+    invalid_annotation_target: ignore
