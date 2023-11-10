@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_engineer_codecheck/ui/home/home_page.dart';
+import 'package:flutter_engineer_codecheck/ui/repo_list/repo_list_page.dart';
 import 'package:flutter_engineer_codecheck/ui/theme/app_theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -14,7 +14,7 @@ class App extends ConsumerWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: appTheme,
-      home: const HomePage(),
+      home: const RepoListPage(),
     );
   }
 }

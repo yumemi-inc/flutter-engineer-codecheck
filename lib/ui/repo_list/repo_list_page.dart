@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_engineer_codecheck/repos_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomePage extends ConsumerWidget {
-  const HomePage({super.key});
+class RepoListPage extends ConsumerWidget {
+  const RepoListPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
