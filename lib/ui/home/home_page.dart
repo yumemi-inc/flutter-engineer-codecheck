@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_engineer_codecheck/repos_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomePage extends ConsumerWidget {
@@ -6,34 +7,41 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // TODO: リポジトリから取得する
-    final listItems = ['item1', 'item2', 'item3'];
+    final repos = ref.watch(reposViewModelProvider);
+    final reposViewModel = ref.watch(reposViewModelProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
       ),
-      body: Column(
-        children: [
-          const TextField(
-            decoration: InputDecoration(
-              labelText: 'Enter keyword',
+      body: repos.when(
+        data: (repos) => Column(
+          children: [
+            TextField(
+              decoration: const InputDecoration(
+                labelText: 'Enter keyword',
+              ),
+              onSubmitted: reposViewModel.searchRepos,
             ),
-          ),
-          Expanded(
-            child: ListView.separated(
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(listItems[index]),
-                );
-              },
-              separatorBuilder: (context, index) {
-                return const Divider();
-              },
-              itemCount: listItems.length,
+            Expanded(
+              child: ListView.separated(
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(repos[index].name),
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return const Divider();
+                },
+                itemCount: repos.length,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
+        error: (_, __) => Container(),
+        loading: () => const Center(
+          child: CircularProgressIndicator(),
+        ),
       ),
     );
   }
