@@ -22,6 +22,16 @@ Repo _$RepoFromJson(Map<String, dynamic> json) {
 mixin _$Repo {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'full_name')
+  String get fullName => throw _privateConstructorUsedError;
+  Owner get owner => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+  @JsonKey(name: 'updated_at')
+  String get updatedAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'stargazers_count')
+  int get stargazersCount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'language')
+  String? get language => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +43,17 @@ abstract class $RepoCopyWith<$Res> {
   factory $RepoCopyWith(Repo value, $Res Function(Repo) then) =
       _$RepoCopyWithImpl<$Res, Repo>;
   @useResult
-  $Res call({int id, String name});
+  $Res call(
+      {int id,
+      String name,
+      @JsonKey(name: 'full_name') String fullName,
+      Owner owner,
+      String? description,
+      @JsonKey(name: 'updated_at') String updatedAt,
+      @JsonKey(name: 'stargazers_count') int stargazersCount,
+      @JsonKey(name: 'language') String? language});
+
+  $OwnerCopyWith<$Res> get owner;
 }
 
 /// @nodoc
@@ -51,6 +71,12 @@ class _$RepoCopyWithImpl<$Res, $Val extends Repo>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? fullName = null,
+    Object? owner = null,
+    Object? description = freezed,
+    Object? updatedAt = null,
+    Object? stargazersCount = null,
+    Object? language = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -61,7 +87,39 @@ class _$RepoCopyWithImpl<$Res, $Val extends Repo>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      fullName: null == fullName
+          ? _value.fullName
+          : fullName // ignore: cast_nullable_to_non_nullable
+              as String,
+      owner: null == owner
+          ? _value.owner
+          : owner // ignore: cast_nullable_to_non_nullable
+              as Owner,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      stargazersCount: null == stargazersCount
+          ? _value.stargazersCount
+          : stargazersCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      language: freezed == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $OwnerCopyWith<$Res> get owner {
+    return $OwnerCopyWith<$Res>(_value.owner, (value) {
+      return _then(_value.copyWith(owner: value) as $Val);
+    });
   }
 }
 
@@ -72,7 +130,18 @@ abstract class _$$RepoImplCopyWith<$Res> implements $RepoCopyWith<$Res> {
       __$$RepoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String name});
+  $Res call(
+      {int id,
+      String name,
+      @JsonKey(name: 'full_name') String fullName,
+      Owner owner,
+      String? description,
+      @JsonKey(name: 'updated_at') String updatedAt,
+      @JsonKey(name: 'stargazers_count') int stargazersCount,
+      @JsonKey(name: 'language') String? language});
+
+  @override
+  $OwnerCopyWith<$Res> get owner;
 }
 
 /// @nodoc
@@ -87,6 +156,12 @@ class __$$RepoImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? fullName = null,
+    Object? owner = null,
+    Object? description = freezed,
+    Object? updatedAt = null,
+    Object? stargazersCount = null,
+    Object? language = freezed,
   }) {
     return _then(_$RepoImpl(
       id: null == id
@@ -97,6 +172,30 @@ class __$$RepoImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      fullName: null == fullName
+          ? _value.fullName
+          : fullName // ignore: cast_nullable_to_non_nullable
+              as String,
+      owner: null == owner
+          ? _value.owner
+          : owner // ignore: cast_nullable_to_non_nullable
+              as Owner,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      stargazersCount: null == stargazersCount
+          ? _value.stargazersCount
+          : stargazersCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      language: freezed == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -104,7 +203,16 @@ class __$$RepoImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$RepoImpl extends _Repo {
-  const _$RepoImpl({required this.id, required this.name}) : super._();
+  const _$RepoImpl(
+      {required this.id,
+      required this.name,
+      @JsonKey(name: 'full_name') required this.fullName,
+      required this.owner,
+      required this.description,
+      @JsonKey(name: 'updated_at') required this.updatedAt,
+      @JsonKey(name: 'stargazers_count') required this.stargazersCount,
+      @JsonKey(name: 'language') required this.language})
+      : super._();
 
   factory _$RepoImpl.fromJson(Map<String, dynamic> json) =>
       _$$RepoImplFromJson(json);
@@ -113,10 +221,26 @@ class _$RepoImpl extends _Repo {
   final int id;
   @override
   final String name;
+  @override
+  @JsonKey(name: 'full_name')
+  final String fullName;
+  @override
+  final Owner owner;
+  @override
+  final String? description;
+  @override
+  @JsonKey(name: 'updated_at')
+  final String updatedAt;
+  @override
+  @JsonKey(name: 'stargazers_count')
+  final int stargazersCount;
+  @override
+  @JsonKey(name: 'language')
+  final String? language;
 
   @override
   String toString() {
-    return 'Repo(id: $id, name: $name)';
+    return 'Repo(id: $id, name: $name, fullName: $fullName, owner: $owner, description: $description, updatedAt: $updatedAt, stargazersCount: $stargazersCount, language: $language)';
   }
 
   @override
@@ -125,12 +249,24 @@ class _$RepoImpl extends _Repo {
         (other.runtimeType == runtimeType &&
             other is _$RepoImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.fullName, fullName) ||
+                other.fullName == fullName) &&
+            (identical(other.owner, owner) || other.owner == owner) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt) &&
+            (identical(other.stargazersCount, stargazersCount) ||
+                other.stargazersCount == stargazersCount) &&
+            (identical(other.language, language) ||
+                other.language == language));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name);
+  int get hashCode => Object.hash(runtimeType, id, name, fullName, owner,
+      description, updatedAt, stargazersCount, language);
 
   @JsonKey(ignore: true)
   @override
@@ -147,8 +283,15 @@ class _$RepoImpl extends _Repo {
 }
 
 abstract class _Repo extends Repo {
-  const factory _Repo({required final int id, required final String name}) =
-      _$RepoImpl;
+  const factory _Repo(
+      {required final int id,
+      required final String name,
+      @JsonKey(name: 'full_name') required final String fullName,
+      required final Owner owner,
+      required final String? description,
+      @JsonKey(name: 'updated_at') required final String updatedAt,
+      @JsonKey(name: 'stargazers_count') required final int stargazersCount,
+      @JsonKey(name: 'language') required final String? language}) = _$RepoImpl;
   const _Repo._() : super._();
 
   factory _Repo.fromJson(Map<String, dynamic> json) = _$RepoImpl.fromJson;
@@ -157,6 +300,22 @@ abstract class _Repo extends Repo {
   int get id;
   @override
   String get name;
+  @override
+  @JsonKey(name: 'full_name')
+  String get fullName;
+  @override
+  Owner get owner;
+  @override
+  String? get description;
+  @override
+  @JsonKey(name: 'updated_at')
+  String get updatedAt;
+  @override
+  @JsonKey(name: 'stargazers_count')
+  int get stargazersCount;
+  @override
+  @JsonKey(name: 'language')
+  String? get language;
   @override
   @JsonKey(ignore: true)
   _$$RepoImplCopyWith<_$RepoImpl> get copyWith =>
