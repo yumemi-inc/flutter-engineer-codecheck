@@ -18,7 +18,10 @@ class SearchAppBar extends StatelessWidget {
         elevation: const MaterialStatePropertyAll(0), // appbarと同じ高さに
         controller: _textEditingController,
         backgroundColor: MaterialStatePropertyAll(Colors.grey.withOpacity(0.1)),
-        leading: const Icon(Icons.search),
+        leading: const Padding(
+          padding: EdgeInsets.all(8),
+          child: Icon(Icons.search),
+        ),
         trailing: [
           IconButton(
             icon: const Icon(Icons.close),
