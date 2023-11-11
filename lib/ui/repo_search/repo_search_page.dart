@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_engineer_codecheck/repos_view_model.dart';
 import 'package:flutter_engineer_codecheck/ui/repo_search/repo_list_tile.dart';
 import 'package:flutter_engineer_codecheck/ui/repo_search/search_app_bar.dart';
+import 'package:flutter_engineer_codecheck/view_model/repos/repos_view_model.dart';
+import 'package:flutter_engineer_codecheck/view_model/repos/repos_view_model_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class RepoSearchPage extends ConsumerStatefulWidget {
@@ -38,11 +39,11 @@ class _RepoSearchPageState extends ConsumerState<RepoSearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    final reposAsyncValue = ref.watch(reposViewModelProvider);
-    final hasNextPage = ref.watch(
-      reposViewModelProvider.notifier.select((value) => value.hasNextPage),
-    );
+    final reposViewModelState = ref.watch(reposViewModelProvider);
     final reposViewModel = ref.watch(reposViewModelProvider.notifier);
+
+    final repos = reposViewModelState.repos;
+    final reposViewModelStatus = reposViewModelState.status;
 
     return Scaffold(
       appBar: PreferredSize(
@@ -52,44 +53,50 @@ class _RepoSearchPageState extends ConsumerState<RepoSearchPage> {
           onSubmitted: reposViewModel.searchRepos,
         ),
       ),
-      // ここのswitch式はDartの新規機能も勉強しているアピールのために書いています。
-      // AsyncValue.whenで書くこともできます。
-      body: switch (reposAsyncValue) {
-        AsyncData(value: final repos) => switch (repos) {
-            null => const Center(
-                child: Text('上の検索バーから検索してね'),
-              ),
-            [] => const Center(
-                child: Text(
-                  '見つからなかったよ\nキーワードを変えてみてね',
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            _ => ListView.separated(
-                controller: _scrollController,
-                itemBuilder: (context, index) {
-                  if (index == repos.length) {
-                    if (hasNextPage && reposAsyncValue.isRefreshing) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    } else {
-                      return const SizedBox();
-                    }
-                  }
-                  return RepoListTile(repo: repos[index]);
-                },
-                separatorBuilder: (context, index) {
-                  return const Divider();
-                },
-                itemCount: repos.length + 1, // +1はロード中の表示用
-              ),
-          },
-        AsyncError() => const Center(
+      body: switch (reposViewModelState.status) {
+        ReposViewModelStatus.uninitialized => const Center(
+            child: Text('上の検索バーから検索してね'),
+          ),
+        ReposViewModelStatus.loading => const Center(
+            child: CircularProgressIndicator(),
+          ),
+        ReposViewModelStatus.error => const Center(
             child: Text('エラーが発生しました'),
           ),
-        _ => const Center(
-            child: CircularProgressIndicator(),
+        ReposViewModelStatus.empty => const Center(
+            child: Text(
+              '見つからなかったよ\nキーワードを変えてみてね',
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ReposViewModelStatus.contentAvailable ||
+        ReposViewModelStatus.contentAvailableWithError ||
+        ReposViewModelStatus.loadingAdditionalContent ||
+        ReposViewModelStatus.allContentLoaded =>
+          ListView.separated(
+            controller: _scrollController,
+            itemBuilder: (context, index) {
+              if (index == repos.length) {
+                return switch (reposViewModelStatus) {
+                  ReposViewModelStatus.contentAvailableWithError =>
+                    const Center(
+                      child: Text('エラーが発生しました'),
+                    ),
+                  ReposViewModelStatus.loadingAdditionalContent => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  ReposViewModelStatus.allContentLoaded => const Center(
+                      child: Text('全て読み込みました'),
+                    ),
+                  _ => const SizedBox(),
+                };
+              }
+              return RepoListTile(repo: repos[index]);
+            },
+            separatorBuilder: (context, index) {
+              return const Divider();
+            },
+            itemCount: repos.length + 1, // +1はロードやエラーの表示用
           ),
       },
     );
