@@ -1,9 +1,10 @@
+import 'package:flutter_engineer_codecheck/data/app_exception.dart';
 import 'package:flutter_engineer_codecheck/data/model/repo.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'repos_view_model_state.freezed.dart';
-part 'repos_view_model_state.g.dart';
 
+// AsyncValueで表現できないuninitializedとallContentLoadedのために独自Statusを作成
 enum ReposViewModelStatus {
   /// 検索する前の状態
   uninitialized,
@@ -45,10 +46,8 @@ class ReposViewModelState with _$ReposViewModelState {
     /// 7. contentAvailableWithError -> 追加のデータを取得中にエラーがでた
     /// 8. allContentLoaded -> 追加のデータがない
     @Default(ReposViewModelStatus.uninitialized) ReposViewModelStatus status,
+    AppException? error,
   }) = _ReposViewModelState;
 
   const ReposViewModelState._();
-
-  factory ReposViewModelState.fromJson(Map<String, Object?> json) =>
-      _$ReposViewModelStateFromJson(json);
 }

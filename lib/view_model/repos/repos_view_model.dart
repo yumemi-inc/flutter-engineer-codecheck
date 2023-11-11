@@ -1,3 +1,4 @@
+import 'package:flutter_engineer_codecheck/data/app_exception.dart';
 import 'package:flutter_engineer_codecheck/data/repository/github_repository_impl.dart';
 import 'package:flutter_engineer_codecheck/view_model/repos/repos_view_model_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -21,14 +22,22 @@ class ReposViewModel extends _$ReposViewModel {
     state = const ReposViewModelState(status: ReposViewModelStatus.loading);
 
     _query = query;
-    final result = await _repository.searchRepos(query);
 
-    state = state.copyWith(
-      status: result.items.isEmpty
-          ? ReposViewModelStatus.empty
-          : ReposViewModelStatus.contentAvailable,
-      repos: result.items,
-    );
+    try {
+      final result = await _repository.searchRepos(query);
+
+      state = state.copyWith(
+        status: result.items.isEmpty
+            ? ReposViewModelStatus.empty
+            : ReposViewModelStatus.contentAvailable,
+        repos: result.items,
+      );
+    } on AppException catch (e) {
+      state = state.copyWith(
+        status: ReposViewModelStatus.error,
+        error: e,
+      );
+    }
   }
 
   Future<void> searchReposNextPage() async {
@@ -40,23 +49,30 @@ class ReposViewModel extends _$ReposViewModel {
       status: ReposViewModelStatus.loadingAdditionalContent,
     );
 
-    _page++;
-    final result = await _repository.searchRepos(
-      _query,
-      perPage: _perPage,
-      page: _page,
-    );
-    if (result.items.isEmpty) {
-      state = state.copyWith(
-        status: ReposViewModelStatus.allContentLoaded,
+    try {
+      _page++;
+      final result = await _repository.searchRepos(
+        _query,
+        perPage: _perPage,
+        page: _page,
       );
-      return;
-    }
-    final repos = result.items;
+      if (result.items.isEmpty) {
+        state = state.copyWith(
+          status: ReposViewModelStatus.allContentLoaded,
+        );
+        return;
+      }
+      final repos = result.items;
 
-    state = state.copyWith(
-      status: ReposViewModelStatus.contentAvailable,
-      repos: [...state.repos, ...repos],
-    );
+      state = state.copyWith(
+        status: ReposViewModelStatus.contentAvailable,
+        repos: [...state.repos, ...repos],
+      );
+    } on AppException catch (e) {
+      state = state.copyWith(
+        status: ReposViewModelStatus.contentAvailableWithError,
+        error: e,
+      );
+    }
   }
 }

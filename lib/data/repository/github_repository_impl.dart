@@ -1,3 +1,4 @@
+import 'package:flutter_engineer_codecheck/data/app_exception.dart';
 import 'package:flutter_engineer_codecheck/data/model/search_repos_result.dart';
 import 'package:flutter_engineer_codecheck/data/remote/github_data_source.dart';
 import 'package:flutter_engineer_codecheck/data/repository/github_repository.dart';
@@ -30,15 +31,19 @@ class GithubRepositoryImpl extends _$GithubRepositoryImpl
     int? perPage,
     int? page,
   }) async {
-    final retrofitObject = await _dataSource.searchRepositories(
-      query,
-      sort,
-      order,
-      perPage,
-      page,
-    );
-    final json = retrofitObject.json;
+    try {
+      final retrofitObject = await _dataSource.searchRepositories(
+        query,
+        sort,
+        order,
+        perPage,
+        page,
+      );
+      final json = retrofitObject.json;
 
-    return SearchReposResult.fromJson(json);
+      return SearchReposResult.fromJson(json);
+    } on Exception catch (error) {
+      throw AppException(error);
+    }
   }
 }

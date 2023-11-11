@@ -14,10 +14,6 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-ReposViewModelState _$ReposViewModelStateFromJson(Map<String, dynamic> json) {
-  return _ReposViewModelState.fromJson(json);
-}
-
 /// @nodoc
 mixin _$ReposViewModelState {
   List<Repo> get repos => throw _privateConstructorUsedError;
@@ -32,8 +28,8 @@ mixin _$ReposViewModelState {
   /// 7. contentAvailableWithError -> 追加のデータを取得中にエラーがでた
   /// 8. allContentLoaded -> 追加のデータがない
   ReposViewModelStatus get status => throw _privateConstructorUsedError;
+  AppException? get error => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $ReposViewModelStateCopyWith<ReposViewModelState> get copyWith =>
       throw _privateConstructorUsedError;
@@ -45,7 +41,8 @@ abstract class $ReposViewModelStateCopyWith<$Res> {
           ReposViewModelState value, $Res Function(ReposViewModelState) then) =
       _$ReposViewModelStateCopyWithImpl<$Res, ReposViewModelState>;
   @useResult
-  $Res call({List<Repo> repos, ReposViewModelStatus status});
+  $Res call(
+      {List<Repo> repos, ReposViewModelStatus status, AppException? error});
 }
 
 /// @nodoc
@@ -63,6 +60,7 @@ class _$ReposViewModelStateCopyWithImpl<$Res, $Val extends ReposViewModelState>
   $Res call({
     Object? repos = null,
     Object? status = null,
+    Object? error = freezed,
   }) {
     return _then(_value.copyWith(
       repos: null == repos
@@ -73,6 +71,10 @@ class _$ReposViewModelStateCopyWithImpl<$Res, $Val extends ReposViewModelState>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as ReposViewModelStatus,
+      error: freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as AppException?,
     ) as $Val);
   }
 }
@@ -85,7 +87,8 @@ abstract class _$$ReposViewModelStateImplCopyWith<$Res>
       __$$ReposViewModelStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Repo> repos, ReposViewModelStatus status});
+  $Res call(
+      {List<Repo> repos, ReposViewModelStatus status, AppException? error});
 }
 
 /// @nodoc
@@ -101,6 +104,7 @@ class __$$ReposViewModelStateImplCopyWithImpl<$Res>
   $Res call({
     Object? repos = null,
     Object? status = null,
+    Object? error = freezed,
   }) {
     return _then(_$ReposViewModelStateImpl(
       repos: null == repos
@@ -111,21 +115,23 @@ class __$$ReposViewModelStateImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as ReposViewModelStatus,
+      error: freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as AppException?,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$ReposViewModelStateImpl extends _ReposViewModelState {
   const _$ReposViewModelStateImpl(
       {final List<Repo> repos = const [],
-      this.status = ReposViewModelStatus.uninitialized})
+      this.status = ReposViewModelStatus.uninitialized,
+      this.error})
       : _repos = repos,
         super._();
-
-  factory _$ReposViewModelStateImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ReposViewModelStateImplFromJson(json);
 
   final List<Repo> _repos;
   @override
@@ -148,10 +154,12 @@ class _$ReposViewModelStateImpl extends _ReposViewModelState {
   @override
   @JsonKey()
   final ReposViewModelStatus status;
+  @override
+  final AppException? error;
 
   @override
   String toString() {
-    return 'ReposViewModelState(repos: $repos, status: $status)';
+    return 'ReposViewModelState(repos: $repos, status: $status, error: $error)';
   }
 
   @override
@@ -160,13 +168,13 @@ class _$ReposViewModelStateImpl extends _ReposViewModelState {
         (other.runtimeType == runtimeType &&
             other is _$ReposViewModelStateImpl &&
             const DeepCollectionEquality().equals(other._repos, _repos) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.error, error) || other.error == error));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_repos), status);
+      runtimeType, const DeepCollectionEquality().hash(_repos), status, error);
 
   @JsonKey(ignore: true)
   @override
@@ -174,23 +182,14 @@ class _$ReposViewModelStateImpl extends _ReposViewModelState {
   _$$ReposViewModelStateImplCopyWith<_$ReposViewModelStateImpl> get copyWith =>
       __$$ReposViewModelStateImplCopyWithImpl<_$ReposViewModelStateImpl>(
           this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ReposViewModelStateImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class _ReposViewModelState extends ReposViewModelState {
   const factory _ReposViewModelState(
       {final List<Repo> repos,
-      final ReposViewModelStatus status}) = _$ReposViewModelStateImpl;
+      final ReposViewModelStatus status,
+      final AppException? error}) = _$ReposViewModelStateImpl;
   const _ReposViewModelState._() : super._();
-
-  factory _ReposViewModelState.fromJson(Map<String, dynamic> json) =
-      _$ReposViewModelStateImpl.fromJson;
 
   @override
   List<Repo> get repos;
@@ -206,6 +205,8 @@ abstract class _ReposViewModelState extends ReposViewModelState {
   /// 7. contentAvailableWithError -> 追加のデータを取得中にエラーがでた
   /// 8. allContentLoaded -> 追加のデータがない
   ReposViewModelStatus get status;
+  @override
+  AppException? get error;
   @override
   @JsonKey(ignore: true)
   _$$ReposViewModelStateImplCopyWith<_$ReposViewModelStateImpl> get copyWith =>

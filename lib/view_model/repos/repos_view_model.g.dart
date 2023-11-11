@@ -6,7 +6,7 @@ part of 'repos_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$reposViewModelHash() => r'86a8a71f7c791711c686b4e1923b589c920e0a6d';
+String _$reposViewModelHash() => r'7a64c1c279ae8635af65bc7c1085f9ce287022ee';
 
 /// See also [ReposViewModel].
 @ProviderFor(ReposViewModel)
