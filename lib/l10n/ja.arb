@@ -1,0 +1,7 @@
+{
+  "@@locale": "ja",
+  "searchRepos": "検索バーにキーワードを入力してね",
+  "errorOccurred": "エラーが発生しました",
+  "noReposFound": "リポジトリが見つからないよ\nキーワードを変えてみてね",
+  "noMoreReposFound": "これ以上リポジトリがありません"
+}

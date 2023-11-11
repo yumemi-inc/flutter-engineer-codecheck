@@ -3,6 +3,7 @@ import 'package:flutter_engineer_codecheck/ui/repo_search/repo_list_tile.dart';
 import 'package:flutter_engineer_codecheck/ui/repo_search/search_app_bar.dart';
 import 'package:flutter_engineer_codecheck/view_model/repos/repos_view_model.dart';
 import 'package:flutter_engineer_codecheck/view_model/repos/repos_view_model_state.dart';
+import 'package:flutter_gen/gen_l10n/l10n.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class RepoSearchPage extends ConsumerStatefulWidget {
@@ -54,18 +55,21 @@ class _RepoSearchPageState extends ConsumerState<RepoSearchPage> {
         ),
       ),
       body: switch (reposViewModelState.status) {
-        ReposViewModelStatus.uninitialized => const Center(
-            child: Text('上の検索バーから検索してね'),
+        ReposViewModelStatus.uninitialized => Center(
+            child: Text(
+              L10n.of(context)!.searchRepos,
+              textAlign: TextAlign.center,
+            ),
           ),
         ReposViewModelStatus.loading => const Center(
             child: CircularProgressIndicator(),
           ),
-        ReposViewModelStatus.error => const Center(
-            child: Text('エラーが発生しました'),
+        ReposViewModelStatus.error => Center(
+            child: Text(L10n.of(context)!.errorOccurred),
           ),
-        ReposViewModelStatus.empty => const Center(
+        ReposViewModelStatus.empty => Center(
             child: Text(
-              '見つからなかったよ\nキーワードを変えてみてね',
+              L10n.of(context)!.noReposFound,
               textAlign: TextAlign.center,
             ),
           ),
@@ -78,15 +82,14 @@ class _RepoSearchPageState extends ConsumerState<RepoSearchPage> {
             itemBuilder: (context, index) {
               if (index == repos.length) {
                 return switch (reposViewModelStatus) {
-                  ReposViewModelStatus.contentAvailableWithError =>
-                    const Center(
-                      child: Text('エラーが発生しました'),
+                  ReposViewModelStatus.contentAvailableWithError => Center(
+                      child: Text(L10n.of(context)!.errorOccurred),
                     ),
                   ReposViewModelStatus.loadingAdditionalContent => const Center(
                       child: CircularProgressIndicator(),
                     ),
-                  ReposViewModelStatus.allContentLoaded => const Center(
-                      child: Text('全て読み込みました'),
+                  ReposViewModelStatus.allContentLoaded => Center(
+                      child: Text(L10n.of(context)!.noMoreReposFound),
                     ),
                   _ => const SizedBox(),
                 };

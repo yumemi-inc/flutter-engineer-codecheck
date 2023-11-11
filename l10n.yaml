@@ -1,0 +1,4 @@
+arb-dir: lib/l10n
+template-arb-file: en.arb
+output-class: L10n
+output-localization-file: l10n.dart

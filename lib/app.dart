@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_engineer_codecheck/ui/repo_search/repo_search_page.dart';
 import 'package:flutter_engineer_codecheck/ui/theme/app_theme.dart';
+import 'package:flutter_gen/gen_l10n/l10n.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // TODO(kuwano): バックグラウンドでのライト・ダークテーマ切り替えについて調べる
@@ -15,7 +16,8 @@ class App extends ConsumerWidget {
     final appTheme = ref.watch(appThemeProvider);
 
     return MaterialApp(
-      title: 'Flutter Demo',
+      localizationsDelegates: L10n.localizationsDelegates,
+      supportedLocales: L10n.supportedLocales,
       theme: appTheme.light(),
       darkTheme: appTheme.dark(),
       home: const RepoSearchPage(),

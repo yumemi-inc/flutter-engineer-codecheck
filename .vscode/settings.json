@@ -15,6 +15,9 @@
     "source.organizeImports": true
   },
   "dart.flutterSdkPath": ".fvm/flutter_sdk",
+  "files.associations": {
+    "*.arb": "json"
+  },
   "cSpell.words": [
     "codecheck",
     "cupertino",
