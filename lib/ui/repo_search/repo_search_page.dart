@@ -52,49 +52,46 @@ class _RepoSearchPageState extends ConsumerState<RepoSearchPage> {
           onSubmitted: reposViewModel.searchRepos,
         ),
       ),
-      body: reposAsyncValue.when(
-        data: (repos) {
-          if (repos == null) {
-            return const Center(
-              child: Text('上の検索バーから検索してね'),
-            );
-          }
-          if (repos.isEmpty) {
-            return const Center(
-              child: Text(
-                '見つからなかったよ\nキーワードを変えてみてね',
-                textAlign: TextAlign.center,
+      // ここのswitch式はDartの新規機能も勉強しているアピールのために書いています。
+      // AsyncValue.whenで書くこともできます。
+      body: switch (reposAsyncValue) {
+        AsyncData(value: final repos) => switch (repos) {
+            null => const Center(
+                child: Text('上の検索バーから検索してね'),
               ),
-            );
-          }
-
-          return ListView.separated(
-            controller: _scrollController,
-            itemBuilder: (context, index) {
-              if (index == repos.length) {
-                if (hasNextPage && reposAsyncValue.isRefreshing) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else {
-                  return const SizedBox();
-                }
-              }
-              return RepoListTile(repo: repos[index]);
-            },
-            separatorBuilder: (context, index) {
-              return const Divider();
-            },
-            itemCount: repos.length + 1, // +1はロード中の表示用
-          );
-        },
-        error: (_, __) => const SizedBox(),
-        loading: () {
-          return const Center(
+            [] => const Center(
+                child: Text(
+                  '見つからなかったよ\nキーワードを変えてみてね',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            _ => ListView.separated(
+                controller: _scrollController,
+                itemBuilder: (context, index) {
+                  if (index == repos.length) {
+                    if (hasNextPage && reposAsyncValue.isRefreshing) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else {
+                      return const SizedBox();
+                    }
+                  }
+                  return RepoListTile(repo: repos[index]);
+                },
+                separatorBuilder: (context, index) {
+                  return const Divider();
+                },
+                itemCount: repos.length + 1, // +1はロード中の表示用
+              ),
+          },
+        AsyncError() => const Center(
+            child: Text('エラーが発生しました'),
+          ),
+        _ => const Center(
             child: CircularProgressIndicator(),
-          );
-        },
-      ),
+          ),
+      },
     );
   }
 }
