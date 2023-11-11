@@ -47,6 +47,7 @@ class RepoListTile extends StatelessWidget {
                       if (_repo.language != null) ...[
                         RepoLanguageLabel(language: _repo.language!),
                         const SizedBox(width: 4),
+                        const Text('・'),
                       ],
                       RepoStargazersCountLabel(
                         stargazersCount: _repo.stargazersCount,

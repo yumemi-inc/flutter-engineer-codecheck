@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:github_language_colors/github_language_colors.dart';
 
 class RepoLanguageLabel extends StatelessWidget {
   const RepoLanguageLabel({
@@ -14,7 +15,12 @@ class RepoLanguageLabel extends StatelessWidget {
       children: [
         // TODO(kuwano): 色をつける
         // ref: https://github.com/doda-zz/github-language-colors
-        const Icon(Icons.circle),
+        Icon(
+          Icons.circle,
+          color: Color(githubLanguageColors[_language] ?? 0x00000000),
+          size: 16,
+        ),
+        const SizedBox(width: 4),
         Text(_language),
       ],
     );
