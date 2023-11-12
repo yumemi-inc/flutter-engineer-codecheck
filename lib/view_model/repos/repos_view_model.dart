@@ -1,4 +1,5 @@
 import 'package:flutter_engineer_codecheck/data/app_exception.dart';
+import 'package:flutter_engineer_codecheck/data/repository/github_repository.dart';
 import 'package:flutter_engineer_codecheck/data/repository/github_repository_impl.dart';
 import 'package:flutter_engineer_codecheck/view_model/repos/repos_view_model_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -12,7 +13,7 @@ class ReposViewModel extends _$ReposViewModel {
     return const ReposViewModelState();
   }
 
-  late final _repository = ref.read(githubRepositoryImplProvider);
+  late final GithubRepository _repository = ref.read(githubRepositoryProvider);
 
   String _query = '';
   final _perPage = 30;

@@ -6,22 +6,21 @@ part of 'github_repository_impl.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$githubRepositoryImplHash() =>
-    r'8b22d5096918c810b8a287f7faf19a6dc972d027';
+String _$githubRepositoryHash() => r'15e07a226aaa0d35dfc84d0991fc740f96b426f0';
 
-/// See also [GithubRepositoryImpl].
-@ProviderFor(GithubRepositoryImpl)
-final githubRepositoryImplProvider = AutoDisposeNotifierProvider<
-    GithubRepositoryImpl, GithubRepository>.internal(
-  GithubRepositoryImpl.new,
-  name: r'githubRepositoryImplProvider',
+/// See also [githubRepository].
+@ProviderFor(githubRepository)
+final githubRepositoryProvider =
+    AutoDisposeProvider<GithubRepositoryImpl>.internal(
+  githubRepository,
+  name: r'githubRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$githubRepositoryImplHash,
+      : _$githubRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$GithubRepositoryImpl = AutoDisposeNotifier<GithubRepository>;
+typedef GithubRepositoryRef = AutoDisposeProviderRef<GithubRepositoryImpl>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
