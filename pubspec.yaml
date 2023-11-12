@@ -39,6 +39,7 @@ dev_dependencies:
   freezed: ^2.4.5
   json_serializable: ^6.7.1
   retrofit_generator: ^8.0.3
+  mocktail: ^1.0.1
 
 flutter:
   uses-material-design: true
