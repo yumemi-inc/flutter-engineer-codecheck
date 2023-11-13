@@ -9,7 +9,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // Flutterでは解決策はないようだ。
 // ref: https://github.com/flutter/flutter/issues/43806
 class App extends ConsumerWidget {
-  const App({super.key});
+  const App({
+    this.home,
+    super.key,
+  });
+
+  final Widget? home;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,7 +25,7 @@ class App extends ConsumerWidget {
       supportedLocales: L10n.supportedLocales,
       theme: appTheme.light(),
       darkTheme: appTheme.dark(),
-      home: const RepoSearchPage(),
+      home: home ?? const RepoSearchPage(),
     );
   }
 }

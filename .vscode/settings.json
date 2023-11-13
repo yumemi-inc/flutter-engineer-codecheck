@@ -22,6 +22,7 @@
     "codecheck",
     "cupertino",
     "dotenv",
+    "Goldens",
     "interps",
     "kuwano",
     "mocktail",

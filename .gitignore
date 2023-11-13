@@ -46,3 +46,6 @@ app.*.map.json
 # ここまで自動生成されたもの
 
 *.env
+
+# golden test
+**/failures/*.png

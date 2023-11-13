@@ -40,6 +40,8 @@ dev_dependencies:
   json_serializable: ^6.7.1
   retrofit_generator: ^8.0.3
   mocktail: ^1.0.1
+  golden_toolkit: ^0.15.0
+  mocktail_image_network: ^1.0.0
 
 flutter:
   uses-material-design: true
