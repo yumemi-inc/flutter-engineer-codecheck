@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_engineer_codecheck/data/model/repo.dart';
+import 'package:flutter_engineer_codecheck/ui/app_router.dart';
 import 'package:flutter_engineer_codecheck/ui/repo_search/repo_language_label.dart';
 import 'package:flutter_engineer_codecheck/ui/repo_search/repo_stargazers_count_label.dart';
 
@@ -14,7 +15,9 @@ class RepoListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        RepoDetailRoute(repoId: _repo.id).go(context);
+      },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         color: Theme.of(context).listTileTheme.tileColor,

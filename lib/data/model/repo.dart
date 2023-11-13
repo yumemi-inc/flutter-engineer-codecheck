@@ -12,9 +12,13 @@ class Repo with _$Repo {
     required String name,
     @JsonKey(name: 'full_name') required String fullName,
     required Owner owner,
+    @JsonKey(name: 'html_url') required String htmlUrl,
     required String? description,
     @JsonKey(name: 'updated_at') required String updatedAt,
     @JsonKey(name: 'stargazers_count') required int stargazersCount,
+    @JsonKey(name: 'watchers_count') required int watchersCount,
+    @JsonKey(name: 'forks_count') required int forksCount,
+    @JsonKey(name: 'open_issues_count') required int openIssuesCount,
     @JsonKey(name: 'language') required String? language,
   }) = _Repo;
 
