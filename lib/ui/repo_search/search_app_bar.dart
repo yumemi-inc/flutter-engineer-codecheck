@@ -4,11 +4,14 @@ class SearchAppBar extends StatelessWidget {
   const SearchAppBar({
     super.key,
     required TextEditingController textEditingController,
+    required void Function(String)? onChanged,
     required void Function(String)? onSubmitted,
   })  : _textEditingController = textEditingController,
+        _onChanged = onChanged,
         _onSubmitted = onSubmitted;
 
   final TextEditingController _textEditingController;
+  final void Function(String)? _onChanged;
   final void Function(String)? _onSubmitted;
 
   @override
@@ -28,6 +31,7 @@ class SearchAppBar extends StatelessWidget {
             onPressed: _textEditingController.clear,
           ),
         ],
+        onChanged: _onChanged,
         onSubmitted: _onSubmitted,
       ),
     );

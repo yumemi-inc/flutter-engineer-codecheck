@@ -51,7 +51,20 @@ class _RepoSearchPageState extends ConsumerState<RepoSearchPage> {
         preferredSize: const Size.fromHeight(70),
         child: SearchAppBar(
           textEditingController: _textEditingController,
-          onSubmitted: reposViewModel.searchRepos,
+          onChanged: (text) {
+            // 256文字以上はエラーが返ってくるので、入力できないようにする
+            // これはGithubAPIに依存しているので、Repositoryで制御するべき??
+            if (text.length >= 256) {
+              _textEditingController.text = text.substring(0, 255);
+            }
+          },
+          onSubmitted: (text) {
+            // 0文字では検索できない
+            if (text.isEmpty) {
+              return;
+            }
+            reposViewModel.searchRepos(text);
+          },
         ),
       ),
       body: switch (reposViewModelState.status) {
