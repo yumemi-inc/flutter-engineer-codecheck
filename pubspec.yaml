@@ -24,6 +24,7 @@ dependencies:
   ua_client_hints: ^1.1.3
   flutter_dotenv: ^5.1.0
   github_language_colors: ^1.0.1
+  go_router: ^12.1.1
 
 dev_dependencies:
   flutter_test:
@@ -42,6 +43,7 @@ dev_dependencies:
   mocktail: ^1.0.1
   golden_toolkit: ^0.15.0
   mocktail_image_network: ^1.0.0
+  go_router_builder: ^2.3.4
 
 flutter:
   uses-material-design: true
