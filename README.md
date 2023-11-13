@@ -8,6 +8,9 @@
 
 [flutter-architecture-blueprints](https://github.com/wasabeef/flutter-architecture-blueprints)
 
+View 層では基本的に一番上の Page で全ての依存先を定義する。Page 以下のコンポーネントは基本的に statelessWidget とし、Page から引数で必要なデータを渡すようにする。
+Riverpod の Notifier によって Page 全体がリビルドされるが、特にパフォーマンスに影響を与える場合のみコンポーネントから取得しても良いものとする。
+
 ## Linter
 
 デフォルトの[flutter_lints](https://pub.dev/packages/flutter_lints)をさらに厳しめにした[pedantic_mono](https://pub.dev/packages/pedantic_mono)を導入してます。
