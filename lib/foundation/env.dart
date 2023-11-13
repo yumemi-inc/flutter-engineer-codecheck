@@ -2,6 +2,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_engineer_codecheck/foundation/constants.dart';
 
 // ignore: avoid_classes_with_only_static_members
+/// 環境変数のラッパークラス
 class Env {
   static Flavor get flavor {
     switch (const String.fromEnvironment('flavor')) {

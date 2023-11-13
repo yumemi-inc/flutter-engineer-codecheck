@@ -13,8 +13,6 @@ class RepoLanguageLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        // TODO(kuwano): 色をつける
-        // ref: https://github.com/doda-zz/github-language-colors
         Icon(
           Icons.circle,
           color: Color(githubLanguageColors[_language] ?? 0x00000000),

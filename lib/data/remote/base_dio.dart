@@ -10,6 +10,7 @@ Dio baseDio(BaseDioRef ref) {
   return BaseDio.getInstance();
 }
 
+// 全てのdioに共通する設定をここで行う
 class BaseDio with DioMixin implements Dio {
   BaseDio._([BaseOptions? options]) {
     options = BaseOptions(

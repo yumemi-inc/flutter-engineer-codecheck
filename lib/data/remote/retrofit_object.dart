@@ -1,3 +1,4 @@
+/// retrofitで受け取ったjsonをそのまま保持するためのクラス
 class RetrofitObject extends Object {
   const RetrofitObject(
     this.json,

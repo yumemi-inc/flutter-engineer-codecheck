@@ -21,6 +21,7 @@ class _RepoSearchPageState extends ConsumerState<RepoSearchPage> {
   void initState() {
     _textEditingController = TextEditingController();
     _scrollController = ScrollController()
+      // スクロールが一番下に到達したら次のページを読み込む
       ..addListener(() {
         final isBottom = _scrollController.position.pixels ==
             _scrollController.position.maxScrollExtent;

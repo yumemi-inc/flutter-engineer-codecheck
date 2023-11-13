@@ -11,7 +11,6 @@ GithubRepositoryImpl githubRepository(GithubRepositoryRef ref) {
   return GithubRepositoryImpl(ref);
 }
 
-// TODO(kuwano): retrofitを使用せずに、dioだけで実装する
 class GithubRepositoryImpl implements GithubRepository {
   GithubRepositoryImpl(this.ref);
 
