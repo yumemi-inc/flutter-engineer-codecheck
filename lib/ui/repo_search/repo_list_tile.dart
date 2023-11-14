@@ -4,6 +4,8 @@ import 'package:flutter_engineer_codecheck/ui/app_router.dart';
 import 'package:flutter_engineer_codecheck/ui/component/repo_label.dart';
 import 'package:flutter_engineer_codecheck/ui/component/repo_language_label.dart';
 
+// 色やフォントサイズはMaterialのListTileのデザインを元に少し拡張しています。
+// ref: https://m3.material.io/components/lists/specs
 class RepoListTile extends StatelessWidget {
   const RepoListTile({
     required Repo repo,
@@ -29,7 +31,7 @@ class RepoListTile extends StatelessWidget {
                 borderRadius: BorderRadius.circular(60),
                 child: Image.network(
                   _repo.owner.avatarUrl,
-                  height: 60,
+                  width: 60,
                 ),
               ),
             ),
@@ -40,11 +42,15 @@ class RepoListTile extends StatelessWidget {
                 children: [
                   Text(
                     _repo.fullName,
-                    style: Theme.of(context).listTileTheme.titleTextStyle,
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
                   ),
                   Text(
                     _repo.description ?? '',
-                    style: Theme.of(context).listTileTheme.subtitleTextStyle,
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                   ),

@@ -43,9 +43,19 @@ class _RepoDetailPageState extends ConsumerState<RepoDetailPage> {
               ),
             ),
             const SizedBox(height: 16),
-            Text(repo.fullName),
+            Text(
+              repo.fullName,
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+            ),
             const SizedBox(height: 8),
-            Text(repo.description ?? ''),
+            Text(
+              repo.description ?? '',
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
+            ),
             const SizedBox(height: 8),
             if (repo.language != null) ...[
               RepoLanguageLabel(language: repo.language!),
