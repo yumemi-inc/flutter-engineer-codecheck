@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_engineer_codecheck/ui/component/repo_forks_count_label.dart';
+import 'package:flutter_engineer_codecheck/ui/component/repo_label.dart';
 import 'package:flutter_engineer_codecheck/ui/component/repo_language_label.dart';
-import 'package:flutter_engineer_codecheck/ui/component/repo_open_issues_count_label.dart';
-import 'package:flutter_engineer_codecheck/ui/component/repo_stargazers_count_label.dart';
-import 'package:flutter_engineer_codecheck/ui/component/repo_watchers_count_label.dart';
 import 'package:flutter_engineer_codecheck/view_model/repos/repos_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -42,20 +39,24 @@ class _RepoDetailPageState extends ConsumerState<RepoDetailPage> {
               RepoLanguageLabel(language: repo.language!),
             Wrap(
               children: [
-                RepoStargazersCountLabel(
-                  stargazersCount: repo.stargazersCount,
+                RepoLabel(
+                  type: RepoLabelType.stargazersCount,
+                  count: repo.stargazersCount,
                   labelVisible: true,
                 ),
-                RepoForksCountLabel(
-                  forksCount: repo.forksCount,
+                RepoLabel(
+                  type: RepoLabelType.forksCount,
+                  count: repo.forksCount,
                   labelVisible: true,
                 ),
-                RepoWatchersCountLabel(
-                  watchersCount: repo.watchersCount,
+                RepoLabel(
+                  type: RepoLabelType.watchersCount,
+                  count: repo.watchersCount,
                   labelVisible: true,
                 ),
-                RepoOpenIssuesCountLabel(
-                  openIssuesCount: repo.openIssuesCount,
+                RepoLabel(
+                  type: RepoLabelType.openIssuesCount,
+                  count: repo.openIssuesCount,
                   labelVisible: true,
                 ),
               ],
