@@ -3,6 +3,7 @@ import 'package:flutter_engineer_codecheck/data/model/repo.dart';
 import 'package:flutter_engineer_codecheck/ui/component/repo_label.dart';
 import 'package:flutter_engineer_codecheck/ui/component/repo_language_label.dart';
 import 'package:flutter_engineer_codecheck/view_model/repos/repos_view_model.dart';
+import 'package:flutter_gen/gen_l10n/l10n.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -73,18 +74,28 @@ class _RepoDetailPageState extends ConsumerState<RepoDetailPage> {
                 ),
               ],
               _labelsRow(repo),
-              if (repo.readmeText != null) ...[
-                const SizedBox(height: 16),
-                MarkdownBody(
-                  data: repo.readmeText!,
-                  // TODO(kuwano): SVGバッジの表示でエラーが出るので一旦表示しない
-                  // ref: https://badgen.org/
-                  imageBuilder: (uri, title, alt) {
-                    return const SizedBox();
-                  },
-                ),
-                const SizedBox(height: 32),
-              ],
+              const SizedBox(height: 32),
+              repo.readmeText.when(
+                data: (text) {
+                  return MarkdownBody(
+                    data: text,
+                    // TODO(kuwano): SVGバッジの表示でエラーが出るので一旦表示しない
+                    // ref: https://badgen.org/
+                    imageBuilder: (uri, title, alt) {
+                      return const SizedBox();
+                    },
+                  );
+                },
+                error: (_, __) {
+                  return Text(L10n.of(context)!.noReadmeFound);
+                },
+                loading: () {
+                  return const Align(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+              ),
+              const SizedBox(height: 32),
             ],
           ),
         ),

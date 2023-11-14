@@ -19,7 +19,6 @@ _$RepoImpl _$$RepoImplFromJson(Map<String, dynamic> json) => _$RepoImpl(
       forksCount: json['forks_count'] as int,
       openIssuesCount: json['open_issues_count'] as int,
       language: json['language'] as String?,
-      readmeText: json['readmeText'] as String?,
     );
 
 Map<String, dynamic> _$$RepoImplToJson(_$RepoImpl instance) =>
@@ -36,5 +35,4 @@ Map<String, dynamic> _$$RepoImplToJson(_$RepoImpl instance) =>
       'forks_count': instance.forksCount,
       'open_issues_count': instance.openIssuesCount,
       'language': instance.language,
-      'readmeText': instance.readmeText,
     };

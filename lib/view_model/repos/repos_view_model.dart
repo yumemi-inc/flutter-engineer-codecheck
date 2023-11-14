@@ -89,22 +89,38 @@ class ReposViewModel extends _$ReposViewModel {
 
   Future<void> fetchRepoReadme(int repoId) async {
     final oldRepo = state.repos.firstWhere((repo) => repo.id == repoId);
-    final result = await _repository.fetchRepoContent(
-      oldRepo.fullName,
-      'README.md',
-    );
 
-    final newRepo = oldRepo.copyWith(
-      readmeText: result.decodedContent(),
-    );
+    try {
+      final result = await _repository.fetchRepoContent(
+        oldRepo.fullName,
+        'README.md',
+      );
 
-    state = state.copyWith(
-      repos: state.repos.map((repo) {
-        if (repo.id == repoId) {
-          return newRepo;
-        }
-        return repo;
-      }).toList(),
-    );
+      final newRepo = oldRepo.copyWith(
+        readmeText: AsyncData(result.decodedContent()),
+      );
+
+      state = state.copyWith(
+        repos: state.repos.map((repo) {
+          if (repo.id == repoId) {
+            return newRepo;
+          }
+          return repo;
+        }).toList(),
+      );
+    } on AppException catch (e) {
+      final newRepo = oldRepo.copyWith(
+        readmeText: AsyncError(e, StackTrace.current),
+      );
+
+      state = state.copyWith(
+        repos: state.repos.map((repo) {
+          if (repo.id == repoId) {
+            return newRepo;
+          }
+          return repo;
+        }).toList(),
+      );
+    }
   }
 }

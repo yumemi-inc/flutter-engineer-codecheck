@@ -3,5 +3,6 @@
   "searchRepos": "Use the search bar above\nto find repositories.",
   "errorOccurred": "An error occurred.",
   "noReposFound": "No repositories found.\nTry changing the keyword.",
-  "noMoreReposFound": "No more repositories found."
+  "noMoreReposFound": "No more repositories found.",
+  "noReadmeFound": "No README found."
 }
