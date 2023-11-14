@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_engineer_codecheck/data/model/repo.dart';
 import 'package:flutter_engineer_codecheck/ui/component/repo_label.dart';
 import 'package:flutter_engineer_codecheck/ui/component/repo_language_label.dart';
 import 'package:flutter_engineer_codecheck/view_model/repos/repos_view_model.dart';
@@ -71,7 +72,7 @@ class _RepoDetailPageState extends ConsumerState<RepoDetailPage> {
                   height: 8,
                 ),
               ],
-              _labelsRow(),
+              _labelsRow(repo),
               if (repo.readmeText != null) ...[
                 const SizedBox(height: 16),
                 MarkdownBody(
@@ -91,28 +92,28 @@ class _RepoDetailPageState extends ConsumerState<RepoDetailPage> {
     );
   }
 
-  Widget _labelsRow() {
-    return const Wrap(
+  Widget _labelsRow(Repo repo) {
+    return Wrap(
       spacing: 8,
       children: [
         RepoLabel(
           type: RepoLabelType.stargazersCount,
-          count: 100,
+          count: repo.stargazersCount,
           labelVisible: true,
         ),
         RepoLabel(
           type: RepoLabelType.forksCount,
-          count: 100,
+          count: repo.forksCount,
           labelVisible: true,
         ),
         RepoLabel(
           type: RepoLabelType.watchersCount,
-          count: 100,
+          count: repo.watchersCount,
           labelVisible: true,
         ),
         RepoLabel(
           type: RepoLabelType.openIssuesCount,
-          count: 100,
+          count: repo.openIssuesCount,
           labelVisible: true,
         ),
       ],
