@@ -63,34 +63,38 @@ class _RepoDetailPageState extends ConsumerState<RepoDetailPage> {
                 height: 8,
               ),
             ],
-            Wrap(
-              spacing: 8,
-              children: [
-                RepoLabel(
-                  type: RepoLabelType.stargazersCount,
-                  count: repo.stargazersCount,
-                  labelVisible: true,
-                ),
-                RepoLabel(
-                  type: RepoLabelType.forksCount,
-                  count: repo.forksCount,
-                  labelVisible: true,
-                ),
-                RepoLabel(
-                  type: RepoLabelType.watchersCount,
-                  count: repo.watchersCount,
-                  labelVisible: true,
-                ),
-                RepoLabel(
-                  type: RepoLabelType.openIssuesCount,
-                  count: repo.openIssuesCount,
-                  labelVisible: true,
-                ),
-              ],
-            ),
+            _labelsRow(),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _labelsRow() {
+    return const Wrap(
+      spacing: 8,
+      children: [
+        RepoLabel(
+          type: RepoLabelType.stargazersCount,
+          count: 100,
+          labelVisible: true,
+        ),
+        RepoLabel(
+          type: RepoLabelType.forksCount,
+          count: 100,
+          labelVisible: true,
+        ),
+        RepoLabel(
+          type: RepoLabelType.watchersCount,
+          count: 100,
+          labelVisible: true,
+        ),
+        RepoLabel(
+          type: RepoLabelType.openIssuesCount,
+          count: 100,
+          labelVisible: true,
+        ),
+      ],
     );
   }
 }
