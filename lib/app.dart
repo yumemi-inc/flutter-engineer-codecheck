@@ -17,13 +17,25 @@ class App extends ConsumerWidget {
     final appTheme = ref.watch(appThemeProvider);
     final appRouter = ref.watch(appRouterProvider);
 
-    // TODO(kuwano): homeを設定できないのでテストできない
-    return MaterialApp.router(
-      localizationsDelegates: L10n.localizationsDelegates,
-      supportedLocales: L10n.supportedLocales,
-      theme: appTheme.light(),
-      darkTheme: appTheme.dark(),
-      routerConfig: appRouter,
-    );
+    // テストのために本番のコードをいじりたくないが、方法が思いつかないのでこのような実装になっている
+    if (home == null) {
+      // 本番MaterialApp
+      return MaterialApp.router(
+        localizationsDelegates: L10n.localizationsDelegates,
+        supportedLocales: L10n.supportedLocales,
+        theme: appTheme.light(),
+        darkTheme: appTheme.dark(),
+        routerConfig: appRouter,
+      );
+    } else {
+      // テスト用MaterialApp
+      return MaterialApp(
+        localizationsDelegates: L10n.localizationsDelegates,
+        supportedLocales: L10n.supportedLocales,
+        theme: appTheme.light(),
+        darkTheme: appTheme.dark(),
+        home: home,
+      );
+    }
   }
 }

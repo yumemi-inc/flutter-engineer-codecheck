@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter_engineer_codecheck/data/app_exception.dart';
 import 'package:flutter_engineer_codecheck/data/model/repo.dart';
 import 'package:flutter_engineer_codecheck/data/repository/github_repository.dart';
@@ -88,7 +89,10 @@ class ReposViewModel extends _$ReposViewModel {
   }
 
   Future<void> fetchRepoReadme(int repoId) async {
-    final oldRepo = state.repos.firstWhere((repo) => repo.id == repoId);
+    final oldRepo = state.repos.firstWhereOrNull((repo) => repo.id == repoId);
+    if (oldRepo == null) {
+      return;
+    }
 
     try {
       final result = await _repository.fetchRepoContent(
