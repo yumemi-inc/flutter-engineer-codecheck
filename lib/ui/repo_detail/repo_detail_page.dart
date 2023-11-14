@@ -31,12 +31,28 @@ class _RepoDetailPageState extends ConsumerState<RepoDetailPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Align(
-              child: Image.network(repo.owner.avatarUrl),
+              child: Hero(
+                tag: 'repo_image_${repo.id}',
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(120),
+                  child: Image.network(
+                    repo.owner.avatarUrl,
+                    height: 120,
+                  ),
+                ),
+              ),
             ),
+            const SizedBox(height: 16),
             Text(repo.fullName),
+            const SizedBox(height: 8),
             Text(repo.description ?? ''),
-            if (repo.language != null)
+            const SizedBox(height: 8),
+            if (repo.language != null) ...[
               RepoLanguageLabel(language: repo.language!),
+              const SizedBox(
+                height: 8,
+              ),
+            ],
             Wrap(
               spacing: 8,
               children: [

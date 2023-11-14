@@ -23,11 +23,14 @@ class RepoListTile extends StatelessWidget {
         color: Theme.of(context).listTileTheme.tileColor,
         child: Row(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(100),
-              child: Image.network(
-                _repo.owner.avatarUrl,
-                height: 60,
+            Hero(
+              tag: 'repo_image_${_repo.id}',
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(60),
+                child: Image.network(
+                  _repo.owner.avatarUrl,
+                  height: 60,
+                ),
               ),
             ),
             const SizedBox(width: 16),
