@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_engineer_codecheck/ui/component/repo_forks_count_label.dart';
+import 'package:flutter_engineer_codecheck/ui/component/repo_language_label.dart';
+import 'package:flutter_engineer_codecheck/ui/component/repo_open_issues_count_label.dart';
+import 'package:flutter_engineer_codecheck/ui/component/repo_stargazers_count_label.dart';
+import 'package:flutter_engineer_codecheck/ui/component/repo_watchers_count_label.dart';
 import 'package:flutter_engineer_codecheck/view_model/repos/repos_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -20,18 +25,43 @@ class _RepoDetailPageState extends ConsumerState<RepoDetailPage> {
     final repo = ref.watch(repoProvider(widget.repoId));
 
     return Scaffold(
-      appBar: AppBar(),
-      body: Column(
-        children: [
-          Image.network(repo.owner.avatarUrl),
-          Text(repo.fullName),
-          Text(repo.description ?? ''),
-          Text(repo.language ?? ''),
-          Text(repo.stargazersCount.toString()),
-          Text(repo.watchersCount.toString()),
-          Text(repo.forksCount.toString()),
-          Text(repo.openIssuesCount.toString()),
-        ],
+      appBar: AppBar(
+        title: Text(repo.fullName),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Align(
+              child: Image.network(repo.owner.avatarUrl),
+            ),
+            Text(repo.fullName),
+            Text(repo.description ?? ''),
+            if (repo.language != null)
+              RepoLanguageLabel(language: repo.language!),
+            Wrap(
+              children: [
+                RepoStargazersCountLabel(
+                  stargazersCount: repo.stargazersCount,
+                  labelVisible: true,
+                ),
+                RepoForksCountLabel(
+                  forksCount: repo.forksCount,
+                  labelVisible: true,
+                ),
+                RepoWatchersCountLabel(
+                  watchersCount: repo.watchersCount,
+                  labelVisible: true,
+                ),
+                RepoOpenIssuesCountLabel(
+                  openIssuesCount: repo.openIssuesCount,
+                  labelVisible: true,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

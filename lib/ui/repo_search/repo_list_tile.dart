@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_engineer_codecheck/data/model/repo.dart';
 import 'package:flutter_engineer_codecheck/ui/app_router.dart';
-import 'package:flutter_engineer_codecheck/ui/repo_search/repo_language_label.dart';
-import 'package:flutter_engineer_codecheck/ui/repo_search/repo_stargazers_count_label.dart';
+import 'package:flutter_engineer_codecheck/ui/component/repo_language_label.dart';
+import 'package:flutter_engineer_codecheck/ui/component/repo_stargazers_count_label.dart';
 
 class RepoListTile extends StatelessWidget {
   const RepoListTile({

@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 class RepoStargazersCountLabel extends StatelessWidget {
   const RepoStargazersCountLabel({
     required int stargazersCount,
+    bool labelVisible = false,
     super.key,
-  }) : _stargazersCount = stargazersCount;
+  })  : _stargazersCount = stargazersCount,
+        _labelVisible = labelVisible;
 
   final int _stargazersCount;
+  final bool _labelVisible;
 
   String generateStargazersCountK(int count) {
     if (count < 1000) {
@@ -23,9 +26,14 @@ class RepoStargazersCountLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
         const Icon(Icons.star_border),
         Text(generateStargazersCountK(_stargazersCount)),
+        if (_labelVisible) ...[
+          const SizedBox(width: 4),
+          const Text('stars'),
+        ],
       ],
     );
   }
