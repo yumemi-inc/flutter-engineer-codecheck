@@ -27,6 +27,7 @@ class RepoLabel extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         _generateRepoIcon(_type),
+        const SizedBox(width: 4),
         Text(_generateCountK(_count)),
         if (_labelVisible) ...[
           const SizedBox(width: 4),

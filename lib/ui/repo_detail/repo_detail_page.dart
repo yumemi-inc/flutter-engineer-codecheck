@@ -38,6 +38,7 @@ class _RepoDetailPageState extends ConsumerState<RepoDetailPage> {
             if (repo.language != null)
               RepoLanguageLabel(language: repo.language!),
             Wrap(
+              spacing: 8,
               children: [
                 RepoLabel(
                   type: RepoLabelType.stargazersCount,
