@@ -24,4 +24,10 @@ abstract class GithubDataSource {
     @Query('per_page') int? perPage,
     @Query('page') int? page,
   );
+
+  @GET('/repos/{full_name}/contents/{path}')
+  Future<RetrofitObject> getRepoContent(
+    @Path('full_name') String fullName,
+    @Path('path') String path,
+  );
 }

@@ -20,6 +20,7 @@ class Repo with _$Repo {
     @JsonKey(name: 'forks_count') required int forksCount,
     @JsonKey(name: 'open_issues_count') required int openIssuesCount,
     @JsonKey(name: 'language') required String? language,
+    required String? readmeText,
   }) = _Repo;
 
   const Repo._();
