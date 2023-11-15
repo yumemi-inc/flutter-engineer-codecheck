@@ -1,34 +1,120 @@
 # Github Repository Search
 
-## Git Branching Model
+![ezgif-4-16850e3b19](https://github.com/RYO1223/flutter-engineer-codecheck/assets/70420716/ace86cc2-b36b-4d0e-83c4-d3060a403e6a)
 
-[git-flow](https://nvie.com/posts/a-successful-git-branching-model/)を採用しました。
 
-## Architecture
+## ページ一覧
 
-[flutter-architecture-blueprints](https://github.com/wasabeef/flutter-architecture-blueprints)
+### トップページ
 
-View 層では基本的に一番上の Page で全ての依存先を定義する。Page 以下のコンポーネントは基本的に statelessWidget とし、Page から引数で必要なデータを渡すようにする。
-Riverpod の Notifier によって Page 全体がリビルドされるが、特にパフォーマンスに影響を与える場合のみコンポーネントから取得しても良いものとする。
+英語 | 日本語
+--|--
+![IMG_7866003D1996-1](https://github.com/RYO1223/flutter-engineer-codecheck/assets/70420716/9d093a82-e7bc-466e-bc7e-3de0a28a5445) | ![8AD9232D-DB64-4277-B549-CF7EF0CBCB9C](https://github.com/RYO1223/flutter-engineer-codecheck/assets/70420716/1bceab93-ab56-4615-a2af-7f42b7dd0e35)
 
-## Linter
+### 検索ページ
 
-デフォルトの[flutter_lints](https://pub.dev/packages/flutter_lints)をさらに厳しめにした[pedantic_mono](https://pub.dev/packages/pedantic_mono)を導入してます。
+通常(light)| 通常(dark) | 0件 | エラー
+--|--|--|--
+![D19D5865-5526-4416-BA4E-CE227D956637](https://github.com/RYO1223/flutter-engineer-codecheck/assets/70420716/ae16c715-38e0-4010-98dd-9758d02399cf) | ![E6C9EF03-8772-4C95-93D6-D07CFEB59CE7](https://github.com/RYO1223/flutter-engineer-codecheck/assets/70420716/f91f4e1d-75bb-495c-a679-b1d986a004b1) | ![7E737C7A-E4A9-4559-8787-8407823D4E88](https://github.com/RYO1223/flutter-engineer-codecheck/assets/70420716/5f68468d-f2ae-4a0f-a188-1b37aff41a93) | ![IMG_BA37282E35A5-1](https://github.com/RYO1223/flutter-engineer-codecheck/assets/70420716/4b5f27bc-0e6c-4fb5-8425-816dd22a4cca)
 
-追加で[custom_lint](https://pub.dev/packages/custom_lint)を導入して[riverpod_lint](https://pub.dev/packages/riverpod_lint)を追加してます。
+### 詳細ページ
 
-## Formatter
+<img src="https://github.com/RYO1223/flutter-engineer-codecheck/assets/70420716/99e7261e-ce9a-4185-9f56-b0238d129269" width="25%" />
 
-デフォルトのものを使用してます。
+## 技術スタック
 
-## dart-define-from-file を導入
+- Git ブランチモデル - [git-flow](https://nvie.com/posts/a-successful-git-branching-model/)
+- アーキテクチャ - [flutter-architecture-blueprints](https://github.com/wasabeef/flutter-architecture-blueprints)
+- リンター
+  - デフォルトの[flutter_lints](https://pub.dev/packages/flutter_lints)をさらに厳しめにした[pedantic_mono](https://pub.dev/packages/pedantic_mono)を導入してます。
+  - 追加で[custom_lint](https://pub.dev/packages/custom_lint)を導入して[riverpod_lint](https://pub.dev/packages/riverpod_lint)を追加してます。
+- フォーマッター - デフォルトのものを使用
+- モデル - [freezed](https://pub.dev/packages/freezed)
+- 多言語対応 - [flutter_localizations](https://pub.dev/packages/flutter_localization)
+- 環境変数
+  - dart-define-from-file を導入  [こちらの記事](https://zenn.dev/altiveinc/articles/separating-environments-in-flutter#ios%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AB%E7%92%B0%E5%A2%83%E3%82%92%E5%8F%8D%E6%98%A0%E3%81%95%E3%81%9B%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AB%E5%BF%85%E8%A6%81%E3%81%AA%E3%81%93%E3%81%A8)を参考
+  - GithubAPIトークンのために[dotenv]()を導入
+- テスト
+  - [mocktail]()を使用したUI・Widgetテスト
+  - [golden_test]()を使用したゴールデンテスト
+- ルーティング - [go_router]() & [go_router_builder]()
+- CI/CD - Github Actionsでテスト、ビルド、デプロイ対応
+- iOS/Android/Web対応
 
-[こちらの記事](https://zenn.dev/altiveinc/articles/separating-environments-in-flutter#ios%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AB%E7%92%B0%E5%A2%83%E3%82%92%E5%8F%8D%E6%98%A0%E3%81%95%E3%81%9B%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AB%E5%BF%85%E8%A6%81%E3%81%AA%E3%81%93%E3%81%A8)を参考に導入してます。
+### 対応できていないこと
 
-## VSCode Extensions
+- [一部のCI/CD](https://github.com/RYO1223/flutter-engineer-codecheck/issues/10)
+- [様々な環境でのゴールデンテスト](https://github.com/RYO1223/flutter-engineer-codecheck/issues/9)
+- [テストコードの共通化](https://github.com/RYO1223/flutter-engineer-codecheck/issues/2)
+- [アニメーションやリッチな表示](https://github.com/RYO1223/flutter-engineer-codecheck/issues/11)
+- [横画面対応](https://github.com/RYO1223/flutter-engineer-codecheck/issues/12)
 
-- [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
-  typo を防ぐために入れています。`.vscode/settings.json`に`cSpell.words`がありますが、導入してない場合は無視されるだけなので入れてなくても問題はありません。
+## アーキテクチャ詳細
+
+こちらには私の見解が含まれています。間違ったことを言っていれば指摘してください😄
+
+基本的に`flutter-architecture-blueprints`をそのまま使用しています。
+
+### フォルダ構成
+
+```lib/
+├── data/
+│   ├── model/
+│   │   └── [model_name].dart
+│   ├── remote/
+│   │   ├── base_dio.dart
+│   │   ├── [remote_name]_dio.dart
+│   │   └── [remote_name]_data_source.dart
+│   └── repository/
+│       ├── [repository_name]_repository.dart
+│       └── [repository_name]_repository_impl.dart
+├── ui/
+│   ├── component/
+│   ├── theme/
+│   │   └── app_theme.dart
+│   └── [page_name]/
+│       └── [page_name]_page.dart
+├── view_model/
+│   └── [VM_name]/
+│       ├── [VM_name]_view_model.dart
+│       └── [VM_name]_view_model_state.dart
+├── app.dart
+└── main.dart
+```
+
+### View層のルール
+
+- 各ページは`ConsumerWidget`か`ConsumerStatefulWidget`を継承します
+- 各ページのbuild()の一番上に依存しているViewModelを書きます。基本的にページ以下のコンポーネントからViewModelに依存しないでください。（ページ毎にリビルドされるが、パフォーマンスに問題がある場合はコンポーネントから呼び出して良いものとする）
+- ページからコンポーネントに引数を渡す場合はなるべく最小限にしてください。関数はページで定義してください。
+- 他のページに遷移する場合も引数は最小限にしてください（例えば、インスタンスを直接渡すのではなくidのみ渡すようにして、遷移先でviewModelからインスタンスを取得する）
+- 特定のページでしか使用しないコンポーネントはページフォルダに作っても良い
+
+### ViewModelのルール
+
+- RiverpodのNotiferで作成してください
+- ステートが複雑な場合は同じフォルダに`[VM_name]_view_model_state.dart`を作成してください。ステートはfreezedで作成してください
+- リポジトリを使用する場合はリポジトリのインターフェイスに依存してください
+- 各関数はデータを直接返さないようにしてください。必ずstateを更新して、Notifierを通してViewをリビルドさせてください。
+
+### Repositoryのルール
+
+- 必ずインターフェイスと実装を分けてください。こうするとテスト時にモックを作成しやすくなります。
+- Repositoryはアプリ内外を繋ぐ役目があります。関数名はアプリ内での表記にしてください。remoteやlocalのデータソースの呼び出しはアプリ外の表記にしてください。
+  - 例えばアプリ内では`Repo`と呼んでいるが、アプリ外では`Repository`と呼んでいるのでRepositoryで変換する
+  - アプリ内ではオブジェクトは`Model`として扱われるが、アプリ外では`json`でデータを持っているので変換する
+
+### Remoteのルール
+
+- それぞれのRemote毎にBaseDioを拡張した[Remote]Dioを作成してください。
+- RESTAPIの場合はRetrofitを使用して自動生成してください
+- 関数名などはアプリ外の表記をそのまま使用してください。アプリ内外の名前の変換はRepositoryで行います。
+- Retrofitはモデル変換まで自動で行いますが、モデル変換はRepositoryの責務なので、[RetrofitObject](https://github.com/RYO1223/flutter-engineer-codecheck/blob/develop/lib/data/remote/retrofit_object.dart)を使用してjsonをそのまま保持するようにしてください。
+
+### Localのルール
+
+今回のアプリでは使用していないのでわかりません。
+
 
 以下オリジナルのまま
 
