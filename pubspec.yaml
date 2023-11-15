@@ -2,6 +2,7 @@ name: flutter_engineer_codecheck
 description: A new Flutter project.
 publish_to: 'none'
 
+# 自動デプロイ時にはタグから自動でバージョンを取得するのでこちらは使用しない
 version: 0.1.0+1
 
 environment:
@@ -15,37 +16,62 @@ dependencies:
   intl: any
 
   cupertino_icons: ^1.0.2
+
+  # 状態管理
   flutter_riverpod: ^2.4.5
   riverpod_annotation: ^2.3.0
+
+  # モデル生成
   freezed_annotation: ^2.4.1
   json_annotation: ^4.8.1
+
+  # 外部通信
   dio: ^5.3.3
   retrofit: ^4.0.3
+
+  # GithubAPIのトークンを流し込む用
+  # 本番運用だとそもそもコードにトークンを含めてはいけないので不要
   flutter_dotenv: ^5.1.0
+
+  # githubの言語カラーを取得する用
   github_language_colors: ^1.0.1
+
+  # ルーティング
   go_router: ^12.1.1
+
+  # マークダウン
   flutter_markdown: ^0.6.18+2
+
+  # コレクションの便利メソッド
   collection: ^1.17.2
+
+  # ローディング中に仮のUIを表示するやつ
   shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^2.0.0
 
+  # linter形
+  flutter_lints: ^2.0.0
   pedantic_mono: any
-  riverpod_generator: ^2.3.5
-  build_runner: ^2.4.6
   custom_lint: ^0.5.6
   riverpod_lint: ^2.3.3
+
+  # build_runner関連の自動生成形のやつ
+  build_runner: ^2.4.6
+  riverpod_generator: ^2.3.5
+  go_router_builder: ^2.3.4
   freezed: ^2.4.5
   json_serializable: ^6.7.1
-  retrofit_generator: ^8.0.3
+  retrofit_generator: ^8.0.3 # REST APIを自動生成するやつ
+
+  # テスト関連
   mocktail: ^1.0.1
-  golden_toolkit: ^0.15.0
   mocktail_image_network: ^1.0.0
-  go_router_builder: ^2.3.4
+  golden_toolkit: ^0.15.0
+
 
 flutter:
   uses-material-design: true
