@@ -68,55 +68,59 @@ class _RepoSearchPageState extends ConsumerState<RepoSearchPage> {
           },
         ),
       ),
-      body: switch (reposViewModelState.status) {
-        ReposViewModelStatus.uninitialized => Center(
-            child: Text(
-              L10n.of(context)!.searchRepos,
-              textAlign: TextAlign.center,
+      body: SafeArea(
+        bottom: false,
+        child: switch (reposViewModelState.status) {
+          ReposViewModelStatus.uninitialized => Center(
+              child: Text(
+                L10n.of(context)!.searchRepos,
+                textAlign: TextAlign.center,
+              ),
             ),
-          ),
-        ReposViewModelStatus.loading => const Center(
-            child: CircularProgressIndicator(),
-          ),
-        ReposViewModelStatus.error => Center(
-            child: Text(L10n.of(context)!.errorOccurred),
-          ),
-        ReposViewModelStatus.empty => Center(
-            child: Text(
-              L10n.of(context)!.noReposFound,
-              textAlign: TextAlign.center,
+          ReposViewModelStatus.loading => const Center(
+              child: CircularProgressIndicator(),
             ),
-          ),
-        ReposViewModelStatus.contentAvailable ||
-        ReposViewModelStatus.contentAvailableWithError ||
-        ReposViewModelStatus.loadingAdditionalContent ||
-        ReposViewModelStatus.allContentLoaded =>
-          ListView.separated(
-            controller: _scrollController,
-            itemBuilder: (context, index) {
-              // listの一番下にロード中やエラーの表示用のwidgetを表示する
-              if (index == repos.length) {
-                return switch (reposViewModelStatus) {
-                  ReposViewModelStatus.contentAvailableWithError => Center(
-                      child: Text(L10n.of(context)!.errorOccurred),
-                    ),
-                  ReposViewModelStatus.loadingAdditionalContent => const Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  ReposViewModelStatus.allContentLoaded => Center(
-                      child: Text(L10n.of(context)!.noMoreReposFound),
-                    ),
-                  _ => const SizedBox(),
-                };
-              }
-              return RepoListTile(repo: repos[index]);
-            },
-            separatorBuilder: (context, index) {
-              return const Divider();
-            },
-            itemCount: repos.length + 1, // +1はロードやエラーの表示用
-          ),
-      },
+          ReposViewModelStatus.error => Center(
+              child: Text(L10n.of(context)!.errorOccurred),
+            ),
+          ReposViewModelStatus.empty => Center(
+              child: Text(
+                L10n.of(context)!.noReposFound,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ReposViewModelStatus.contentAvailable ||
+          ReposViewModelStatus.contentAvailableWithError ||
+          ReposViewModelStatus.loadingAdditionalContent ||
+          ReposViewModelStatus.allContentLoaded =>
+            ListView.separated(
+              controller: _scrollController,
+              itemBuilder: (context, index) {
+                // listの一番下にロード中やエラーの表示用のwidgetを表示する
+                if (index == repos.length) {
+                  return switch (reposViewModelStatus) {
+                    ReposViewModelStatus.contentAvailableWithError => Center(
+                        child: Text(L10n.of(context)!.errorOccurred),
+                      ),
+                    ReposViewModelStatus.loadingAdditionalContent =>
+                      const Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    ReposViewModelStatus.allContentLoaded => Center(
+                        child: Text(L10n.of(context)!.noMoreReposFound),
+                      ),
+                    _ => const SizedBox(),
+                  };
+                }
+                return RepoListTile(repo: repos[index]);
+              },
+              separatorBuilder: (context, index) {
+                return const Divider();
+              },
+              itemCount: repos.length + 1, // +1はロードやエラーの表示用
+            ),
+        },
+      ),
     );
   }
 }
