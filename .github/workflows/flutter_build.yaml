@@ -7,20 +7,25 @@ on:
 
 jobs:
   flutter_build:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: "3.13.9"
           channel: "stable"
           cache: true
+
+      # ここでGITHUB_TOKENをsecretから流し込めば本番用のapkが作れますが、漏洩が怖いので実装してません
+      # ref: https://docs.github.com/ja/actions/security-guides/using-secrets-in-github-actions
       - name: Create dot env file
         shell: bash
         run: |
           touch .env
           echo "GITHUB_TOKEN=hogehoge" >> .env
+
       - name: Read tag version
         run: |
           TAG=${GITHUB_REF#refs/tags/}
@@ -30,7 +35,12 @@ jobs:
           echo "BUILD_NAME=$BUILD_NAME" >> $GITHUB_ENV
           echo "BUILD_NUMBER=$BUILD_NUMBER" >> $GITHUB_ENV
 
-      - run: flutter build apk --dart-define-from-file=dart_defines/prod.json --build-name=$BUILD_NAME --build-number=$BUILD_NUMBER
+      - name: Build android apk
+        run: flutter build apk --dart-define-from-file=dart_defines/prod.json --build-name=$BUILD_NAME --build-number=$BUILD_NUMBER
+
+      - name: Build ios ipa
+        run: flutter build ios --dart-define-from-file=dart_defines/prod.json --build-name=$BUILD_NAME --build-number=$BUILD_NUMBER
+
       - uses: actions/create-release@v1
         id: create_release
         env:
@@ -38,7 +48,9 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-      - uses: actions/upload-release-asset@v1
+
+      - name: upload apk
+        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -46,3 +58,13 @@ jobs:
           asset_path: build/app/outputs/flutter-apk/app-release.apk
           asset_name: app-release.apk
           asset_content_type: application/vnd.android.package-archive
+
+      - name: upload ipa
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: build/ios/iphoneos/Runner.ipa
+          asset_name: Runner.ipa
+          asset_content_type: application/octet-stream
