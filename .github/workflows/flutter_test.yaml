@@ -5,7 +5,6 @@ on:
     branches:
       - develop
       - "release/**"
-      - "feature/13" # 後で消す
   pull_request:
     types:
       - opened
