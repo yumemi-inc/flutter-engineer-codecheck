@@ -49,3 +49,5 @@ app.*.map.json
 
 # golden test
 **/failures/*.png
+
+ios/build/.last_build_id
