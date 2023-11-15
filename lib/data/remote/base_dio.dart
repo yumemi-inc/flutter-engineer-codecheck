@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:ua_client_hints/ua_client_hints.dart';
 
 part 'base_dio.g.dart';
 
@@ -20,14 +19,6 @@ class BaseDio with DioMixin implements Dio {
     );
 
     this.options = options;
-    interceptors.add(
-      InterceptorsWrapper(
-        onRequest: (options, handler) async {
-          options.headers.addAll(await userAgentClientHintsHeader());
-          handler.next(options);
-        },
-      ),
-    );
 
     if (kDebugMode) {
       // Local Log
