@@ -94,6 +94,7 @@ class _RepoSearchPageState extends ConsumerState<RepoSearchPage> {
           ListView.separated(
             controller: _scrollController,
             itemBuilder: (context, index) {
+              // listの一番下にロード中やエラーの表示用のwidgetを表示する
               if (index == repos.length) {
                 return switch (reposViewModelStatus) {
                   ReposViewModelStatus.contentAvailableWithError => Center(
