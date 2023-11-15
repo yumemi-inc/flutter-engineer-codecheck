@@ -11,9 +11,13 @@ _$RepoImpl _$$RepoImplFromJson(Map<String, dynamic> json) => _$RepoImpl(
       name: json['name'] as String,
       fullName: json['full_name'] as String,
       owner: Owner.fromJson(json['owner'] as Map<String, dynamic>),
+      htmlUrl: json['html_url'] as String,
       description: json['description'] as String?,
       updatedAt: json['updated_at'] as String,
       stargazersCount: json['stargazers_count'] as int,
+      watchersCount: json['watchers_count'] as int,
+      forksCount: json['forks_count'] as int,
+      openIssuesCount: json['open_issues_count'] as int,
       language: json['language'] as String?,
     );
 
@@ -23,8 +27,12 @@ Map<String, dynamic> _$$RepoImplToJson(_$RepoImpl instance) =>
       'name': instance.name,
       'full_name': instance.fullName,
       'owner': instance.owner,
+      'html_url': instance.htmlUrl,
       'description': instance.description,
       'updated_at': instance.updatedAt,
       'stargazers_count': instance.stargazersCount,
+      'watchers_count': instance.watchersCount,
+      'forks_count': instance.forksCount,
+      'open_issues_count': instance.openIssuesCount,
       'language': instance.language,
     };
