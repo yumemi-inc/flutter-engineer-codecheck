@@ -7,6 +7,7 @@ import 'package:flutter_engineer_codecheck/ui/component/repo_language_label.dart
 
 // 色やフォントサイズはMaterialのListTileのデザインを元に少し拡張しています。
 // ref: https://m3.material.io/components/lists/specs
+// ※ スタイルを変えた時は[RepoListTileShimmer]も変更すること
 class RepoListTile extends StatelessWidget {
   const RepoListTile({
     required Repo repo,
