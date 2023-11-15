@@ -1,3 +1,5 @@
+// テストではデフォルトで記述したい
+// ignore_for_file: no_default_cases
 import 'package:flutter_engineer_codecheck/data/app_exception.dart';
 import 'package:flutter_engineer_codecheck/data/model/search_repos_result.dart';
 import 'package:flutter_engineer_codecheck/data/repository/github_repository_impl.dart';
