@@ -1,0 +1,40 @@
+name: Flutter Build
+
+on:
+  push:
+    branches:
+      - main
+      - feature/13
+    tags:
+      - v*
+
+jobs:
+  flutter_build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.13.9"
+          channel: "stable"
+          cache: true
+      - name: Create dot env file
+        shell: bash
+        run: |
+          touch .env
+          echo "GITHUB_TOKEN=hogehoge" >> .env
+      - name: Read tag version
+        run: |
+          tag = ${GITHUB_REF#refs/tags/}
+          build_name = $(echo $TAG | sed -E 's/v([0-9]+\.[0-9]+\.[0-9]+)\+.*/\1/')
+          build_number = $(echo $TAG | sed -E 's/v[0-9]+\.[0-9]+\.[0-9]+\+([0-9]+)/\1/')
+
+          echo "BUILD_NAME=$build_name" >> $GITHUB_ENV
+          echo "BUILD_NUMBER=$build_number" >> $GITHUB_ENV
+
+      - run: flutter build apk --dart-define-from-file=dart_defines/prod.json --build-name=$BUILD_NAME --build-number=$BUILD_NUMBER
+      - uses: actions/upload-artifact@v2
+        with:
+          name: apk
+          path: build/app/outputs/flutter-apk/app-release.apk
