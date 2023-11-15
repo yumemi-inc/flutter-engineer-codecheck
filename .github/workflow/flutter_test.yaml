@@ -1,0 +1,23 @@
+name: Flutter test
+
+on:
+  push:
+    branches:
+      - develop
+      - 'release/**'
+      - 'feature/13' # 後で消す
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  flutter_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter_version: '3.13.9'
+          channel: 'stable'
+      - run: flutter test
