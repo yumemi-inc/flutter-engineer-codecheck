@@ -40,6 +40,7 @@
   - [mocktail]()を使用したUI・Widgetテスト
   - [golden_test]()を使用したゴールデンテスト
 - ルーティング - [go_router]() & [go_router_builder]()
+- iOS/Android/Web対応
 
 ### 対応できていないこと
 
