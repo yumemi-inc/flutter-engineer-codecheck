@@ -1,0 +1,34 @@
+name: Flutter Test
+
+on:
+  push:
+    branches:
+      - develop
+      - "release/**"
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  flutter_test:
+    # 環境によってGolden Testが失敗するのでmacosを使う
+    # ref: https://qiita.com/Umigishi-Aoi/items/db3e81372085e196dc10
+    # めっちゃコスト高いので別の方法がいいかも
+    # ref: https://docs.github.com/ja/billing/managing-billing-for-github-actions/about-billing-for-github-actions
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.13.9"
+          channel: "stable"
+          cache: true
+      - name: Create dot env file
+        shell: bash
+        run: |
+          touch .env
+          echo "GITHUB_TOKEN=hogehoge" >> .env
+
+      - run: flutter test
