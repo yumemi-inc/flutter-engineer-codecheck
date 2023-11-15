@@ -34,69 +34,72 @@ class _RepoDetailPageState extends ConsumerState<RepoDetailPage> {
       appBar: AppBar(
         title: Text(repo.fullName),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Align(
-                child: Hero(
-                  tag: 'repo_image_${repo.id}',
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(120),
-                    child: Image.network(
-                      repo.owner.avatarUrl,
-                      height: 120,
+      body: SafeArea(
+        bottom: false,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Align(
+                  child: Hero(
+                    tag: 'repo_image_${repo.id}',
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(120),
+                      child: Image.network(
+                        repo.owner.avatarUrl,
+                        height: 120,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 16),
-              Text(
-                repo.fullName,
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                repo.description ?? '',
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
-              ),
-              const SizedBox(height: 8),
-              if (repo.language != null) ...[
-                RepoLanguageLabel(language: repo.language!),
-                const SizedBox(
-                  height: 8,
+                const SizedBox(height: 16),
+                Text(
+                  repo.fullName,
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
                 ),
+                const SizedBox(height: 8),
+                Text(
+                  repo.description ?? '',
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
+                ),
+                const SizedBox(height: 8),
+                if (repo.language != null) ...[
+                  RepoLanguageLabel(language: repo.language!),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                ],
+                _labelsRow(repo),
+                const SizedBox(height: 32),
+                repo.readmeText.when(
+                  data: (text) {
+                    return MarkdownBody(
+                      data: text,
+                      // TODO(kuwano): SVGバッジの表示でエラーが出るので一旦表示しない
+                      // ref: https://badgen.org/
+                      imageBuilder: (uri, title, alt) {
+                        return const SizedBox();
+                      },
+                    );
+                  },
+                  error: (_, __) {
+                    return Text(L10n.of(context)!.noReadmeFound);
+                  },
+                  loading: () {
+                    return const Align(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                ),
+                const SizedBox(height: 32),
               ],
-              _labelsRow(repo),
-              const SizedBox(height: 32),
-              repo.readmeText.when(
-                data: (text) {
-                  return MarkdownBody(
-                    data: text,
-                    // TODO(kuwano): SVGバッジの表示でエラーが出るので一旦表示しない
-                    // ref: https://badgen.org/
-                    imageBuilder: (uri, title, alt) {
-                      return const SizedBox();
-                    },
-                  );
-                },
-                error: (_, __) {
-                  return Text(L10n.of(context)!.noReadmeFound);
-                },
-                loading: () {
-                  return const Align(
-                    child: CircularProgressIndicator(),
-                  );
-                },
-              ),
-              const SizedBox(height: 32),
-            ],
+            ),
           ),
         ),
       ),
