@@ -37,42 +37,46 @@ class RepoListTile extends StatelessWidget {
             ),
             const SizedBox(width: 16),
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    _repo.fullName,
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          color: Theme.of(context).colorScheme.onSurface,
-                        ),
-                  ),
-                  Text(
-                    _repo.description ?? '',
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        ),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                  ),
-                  Row(
-                    children: [
-                      if (_repo.language != null) ...[
-                        RepoLanguageLabel(language: _repo.language!),
-                        const SizedBox(width: 4),
-                        const Text('・'),
-                      ],
-                      RepoLabel(
-                        type: RepoLabelType.stargazersCount,
-                        count: _repo.stargazersCount,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+              child: _rightColumn(context),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Column _rightColumn(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          _repo.fullName,
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
+        ),
+        Text(
+          _repo.description ?? '',
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
+          overflow: TextOverflow.ellipsis,
+          maxLines: 2,
+        ),
+        Row(
+          children: [
+            if (_repo.language != null) ...[
+              RepoLanguageLabel(language: _repo.language!),
+              const SizedBox(width: 4),
+              const Text('・'),
+            ],
+            RepoLabel(
+              type: RepoLabelType.stargazersCount,
+              count: _repo.stargazersCount,
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
