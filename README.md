@@ -47,6 +47,7 @@
 - [様々な環境でのゴールデンテスト](https://github.com/RYO1223/flutter-engineer-codecheck/issues/9)
 - [テストコードの共通化](https://github.com/RYO1223/flutter-engineer-codecheck/issues/2)
 - [アニメーションやリッチな表示](https://github.com/RYO1223/flutter-engineer-codecheck/issues/11)
+- [横画面対応](https://github.com/RYO1223/flutter-engineer-codecheck/issues/12)
 
 ## アーキテクチャ詳細
 
