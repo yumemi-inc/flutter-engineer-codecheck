@@ -77,8 +77,14 @@ class _RepoSearchPageState extends ConsumerState<RepoSearchPage> {
                 textAlign: TextAlign.center,
               ),
             ),
-          ReposViewModelStatus.loading => const Center(
-              child: CircularProgressIndicator(),
+          ReposViewModelStatus.loading => ListView.separated(
+              itemBuilder: (context, index) {
+                return const RepoListTileShimmer();
+              },
+              separatorBuilder: (context, index) {
+                return const Divider();
+              },
+              itemCount: 10,
             ),
           ReposViewModelStatus.error => Center(
               child: Text(L10n.of(context)!.errorOccurred),
