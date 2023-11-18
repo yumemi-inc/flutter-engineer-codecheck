@@ -16,7 +16,15 @@ class SearchAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
+    return SliverAppBar(
+      floating: true,
+      bottom: PreferredSize(
+        preferredSize: const Size.fromHeight(10),
+        child: Container(
+          color: Colors.grey.withOpacity(0.1),
+          height: 1,
+        ),
+      ),
       title: SearchBar(
         elevation: const MaterialStatePropertyAll(0), // appbarと同じ高さに
         controller: _textEditingController,
