@@ -1,4 +1,4 @@
-Analyzing /Users/RYO/environment/flutter-engineer-codecheck ...
+```mermaid
 flowchart TB
   subgraph Arrows
     direction LR
@@ -27,3 +27,4 @@ flowchart TB
   appThemeProvider ==> App;
   appRouterProvider ==> App;
   baseDioProvider ==> githubDioProvider;
+```
