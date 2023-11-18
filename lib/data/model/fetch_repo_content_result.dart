@@ -27,7 +27,10 @@ class FetchRepoContentResult with _$FetchRepoContentResult {
     if (encoding == Encoding.base64.name) {
       // github api は自動的に改行コードを含むので、base64Decode する前に改行コードを削除する
       // この改行コードは元ファイルに含まれていないものなので安全に消せる
-      return String.fromCharCodes(base64Decode(content.replaceAll('\n', '')));
+      return utf8.decode(
+        base64.decode(content.replaceAll('\n', '')),
+        allowMalformed: true,
+      );
     }
     throw AppException(Exception('Unknown encoding: $encoding'));
   }
