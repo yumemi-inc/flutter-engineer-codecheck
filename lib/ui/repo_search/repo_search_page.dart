@@ -74,7 +74,7 @@ class _RepoSearchPageState extends ConsumerState<RepoSearchPage> {
               },
             ),
             switch (reposViewModelState.status) {
-              ReposViewModelStatus.uninitialized => SliverToBoxAdapter(
+              ReposViewModelStatus.uninitialized => SliverFillRemaining(
                   child: Center(
                     child: Text(
                       L10n.of(context)!.searchRepos,
@@ -91,12 +91,12 @@ class _RepoSearchPageState extends ConsumerState<RepoSearchPage> {
                   },
                   itemCount: 10,
                 ),
-              ReposViewModelStatus.error => SliverToBoxAdapter(
+              ReposViewModelStatus.error => SliverFillRemaining(
                   child: Center(
                     child: Text(L10n.of(context)!.errorOccurred),
                   ),
                 ),
-              ReposViewModelStatus.empty => SliverToBoxAdapter(
+              ReposViewModelStatus.empty => SliverFillRemaining(
                   child: Center(
                     child: Text(
                       L10n.of(context)!.noReposFound,
