@@ -47,6 +47,7 @@ dependencies:
 
   # ローディング中に仮のUIを表示するやつ
   shimmer: ^3.0.0
+  jovial_svg: ^1.1.19
 
 dev_dependencies:
   flutter_test:

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_engineer_codecheck/data/model/repo.dart';
+import 'package:flutter_engineer_codecheck/data/remote/image_dio.dart';
 import 'package:flutter_engineer_codecheck/ui/component/repo_label.dart';
 import 'package:flutter_engineer_codecheck/ui/component/repo_language_label.dart';
 import 'package:flutter_engineer_codecheck/view_model/repos/repos_view_model.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jovial_svg/jovial_svg.dart';
 
 class RepoDetailPage extends ConsumerStatefulWidget {
   const RepoDetailPage({
@@ -29,6 +31,7 @@ class _RepoDetailPageState extends ConsumerState<RepoDetailPage> {
   @override
   Widget build(BuildContext context) {
     final repo = ref.watch(repoProvider(widget.repoId));
+    final dio = ref.watch(imageDioProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -79,12 +82,34 @@ class _RepoDetailPageState extends ConsumerState<RepoDetailPage> {
                 const SizedBox(height: 32),
                 repo.readmeText.when(
                   data: (text) {
+                    // TODO(kuwano): たまに劇重のREADMEがあるので、どうにかする
                     return MarkdownBody(
                       data: text,
-                      // TODO(kuwano): SVGバッジの表示でエラーが出るので一旦表示しない
-                      // ref: https://badgen.org/
                       imageBuilder: (uri, title, alt) {
-                        return const SizedBox();
+                        return FutureBuilder(
+                          future: dio
+                              .getUri<String>(uri)
+                              .then((value) => value.data),
+                          builder: (_, snapshot) {
+                            if (!snapshot.hasData) {
+                              return const SizedBox();
+                            }
+                            final data = snapshot.data!;
+                            if (data.startsWith('<svg')) {
+                              return ScalableImageWidget.fromSISource(
+                                si: ScalableImageSource.fromSvgHttpUrl(uri),
+                              );
+                            }
+                            return Image.network(
+                              uri.toString(),
+                              errorBuilder: (_, __, ___) {
+                                // どんな画像が来るのか想定できないので、エラーを無視する
+                                debugPrint('image load error: $uri');
+                                return const SizedBox();
+                              },
+                            );
+                          },
+                        );
                       },
                     );
                   },
