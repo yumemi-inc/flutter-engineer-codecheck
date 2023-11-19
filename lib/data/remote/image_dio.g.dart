@@ -6,7 +6,7 @@ part of 'image_dio.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$imageDioHash() => r'7890770005b7a3f569809bbade008e85e731208d';
+String _$imageDioHash() => r'c5bcb5b74082e1c01464920410e514fce00bc43a';
 
 /// See also [imageDio].
 @ProviderFor(imageDio)
