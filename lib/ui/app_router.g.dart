@@ -7,26 +7,75 @@ part of 'app_router.dart';
 // **************************************************************************
 
 List<RouteBase> get $appRoutes => [
-      $repoSearchRoute,
+      $initialRoute,
+      $homeRoute,
     ];
 
-RouteBase get $repoSearchRoute => GoRouteData.$route(
+RouteBase get $initialRoute => GoRouteData.$route(
       path: '/',
-      factory: $RepoSearchRouteExtension._fromState,
+      factory: $InitialRouteExtension._fromState,
+      routes: [
+        GoRouteData.$route(
+          path: 'sign-in',
+          factory: $SignInRouteExtension._fromState,
+        ),
+      ],
+    );
+
+extension $InitialRouteExtension on InitialRoute {
+  static InitialRoute _fromState(GoRouterState state) => const InitialRoute();
+
+  String get location => GoRouteData.$location(
+        '/',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $SignInRouteExtension on SignInRoute {
+  static SignInRoute _fromState(GoRouterState state) => const SignInRoute();
+
+  String get location => GoRouteData.$location(
+        '/sign-in',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $homeRoute => GoRouteData.$route(
+      path: '/home',
+      factory: $HomeRouteExtension._fromState,
       routes: [
         GoRouteData.$route(
           path: 'repos/:repoId',
           factory: $RepoDetailRouteExtension._fromState,
         ),
+        GoRouteData.$route(
+          path: 'profile/update',
+          factory: $ProfileUpdateRouteExtension._fromState,
+        ),
       ],
     );
 
-extension $RepoSearchRouteExtension on RepoSearchRoute {
-  static RepoSearchRoute _fromState(GoRouterState state) =>
-      const RepoSearchRoute();
+extension $HomeRouteExtension on HomeRoute {
+  static HomeRoute _fromState(GoRouterState state) => const HomeRoute();
 
   String get location => GoRouteData.$location(
-        '/',
+        '/home',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -45,7 +94,25 @@ extension $RepoDetailRouteExtension on RepoDetailRoute {
       );
 
   String get location => GoRouteData.$location(
-        '/repos/${Uri.encodeComponent(repoId.toString())}',
+        '/home/repos/${Uri.encodeComponent(repoId.toString())}',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $ProfileUpdateRouteExtension on ProfileUpdateRoute {
+  static ProfileUpdateRoute _fromState(GoRouterState state) =>
+      const ProfileUpdateRoute();
+
+  String get location => GoRouteData.$location(
+        '/home/profile/update',
       );
 
   void go(BuildContext context) => context.go(location);
